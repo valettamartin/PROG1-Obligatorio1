@@ -11,12 +11,53 @@ header {
     background-color: #f9a370;
 }
 
+.flexContainer {
+    display: flex;
+    justify-content: center;
+}
+
 header img {
     width: 200px;
 }
 
+nav ul li {
+    display: inline-block;
+}
+
+h2 {
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    text-align: center;
+}
+
 #informacion {
     background-color: #f6f1db;
+}
+
+.alumnos, figure {
+    display: flex;
+    align-items: center;
+    margin-left: 2px;
+}
+
+figcaption {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.alumnos img {
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 100%;
 }
 
 #administrar {
