@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header, #informacion, #administrar, #jugar, h2, h3, p, img {
+    margin-bottom: 15px;
+}
+
+header {
+    background-color: #f9a370;
+}
+
+#informacion {
+    background-color: #f6f1db;
+}
+
+#administrar {
+    background-color: #ffd488;
+}
+
+#jugar {
+    background-color: #fddac6;
+}
