@@ -64,7 +64,7 @@ figcaption {
     background-color: #ffd488;
 }
 
-form {
+.formButtons {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(2, 1fr);
