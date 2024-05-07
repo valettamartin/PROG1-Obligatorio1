@@ -64,6 +64,29 @@ figcaption {
     background-color: #ffd488;
 }
 
+form {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.formseccion1 { grid-area: 1 / 1 / 2 / 2; }
+.formseccion2 { grid-area: 1 / 2 / 2 / 3; }
+.formseccion3 { grid-area: 1 / 3 / 2 / 4; }
+.formseccion4 { grid-area: 1 / 4 / 2 / 5; }
+.formseccion5 { grid-area: 1 / 5 / 2 / 6; }
+.formseccion6 { grid-area: 1 / 6 / 2 / 7; }
+.formseccion7 { grid-area: 1 / 7 / 2 / 8; }
+.formseccion8 { grid-area: 1 / 8 / 2 / 9; }
+.formseccion9 { grid-area: 2 / 1 / 3 / 2; }
+.formseccion10 { grid-area: 2 / 2 / 3 / 3; }
+.formseccion11 { grid-area: 2 / 3 / 3 / 4; }
+.formseccion12 { grid-area: 2 / 4 / 3 / 5; }
+.formseccion13 { grid-area: 2 / 5 / 3 / 6; }
+.formseccion14 { grid-area: 2 / 6 / 3 / 7; }
+.formseccion15 { grid-area: 2 / 7 / 3 / 8; }
+.formseccion16 { grid-area: 2 / 8 / 3 / 9; }
+
 #jugar {
     background-color: #fddac6;
 }
