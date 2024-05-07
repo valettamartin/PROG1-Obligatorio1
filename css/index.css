@@ -11,6 +11,10 @@ header {
     background-color: #f9a370;
 }
 
+header img {
+    width: 200px;
+}
+
 #informacion {
     background-color: #f6f1db;
 }
