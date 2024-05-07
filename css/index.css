@@ -82,6 +82,7 @@ figcaption {
 .formseccion10 { grid-area: 2 / 3 / 3 / 4; }
 .formseccion11 { grid-area: 2 / 4 / 3 / 5; }
 .formseccion12 { grid-area: 2 / 5 / 3 / 6; }
+.formseccion13 { grid-area: 2 / 6 / 3 / 7; } 
 
 #jugar {
     background-color: #fddac6;
