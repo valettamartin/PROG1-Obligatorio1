@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta http-equiv="Content-Type" content="txt/html; charset-utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name = "viewport" content="width-device-width, inicial-scale = 1.0">
         <title>Trivia</title>
         <link rel="stylesheet" href="./css/index.css">
@@ -114,35 +114,36 @@
         <section id="jugar">
             <h2>¡A jugar!</h2>
             <article>
-            <h3 class="noMarginBottom">Configuración</h3>
-            <div class="configContainer">
-                <form class="formButtons">
-                    <label class="formseccion1" for="jugarTema">Tema</label>
-                    <select class="formseccion2" id="jugarTema" name="Tema">
-                    </select>
-                    <label class="formseccion3" for="jugarNivel">Nivel</label>
-                    <div class="formseccion4">
-                        <input class="numSelector" id="jugarNivel" type="number">
-                        <input class="buttonType" type="button" value="Jugar">
-                    </div>
-                </form>
-                <h3>Juego</h3>
-                <p>Puntaje acummulado en esta Partida: 0</p>
-                <p>La pregunta es...:</p>
-                <form>
-                    <p class="questionTitle questionGeneralFormat">TEXTO DE LA PREGUNTA</p>
-                    <div class="formFlexContainer answereContainer">
-                        <input class="questionGeneralFormat" id="respuesta1" type="button" value="Respuesta 1">
-                        <input class="questionGeneralFormat" id="respuesta2" type="button" value="Respuesta 2">
-                        <input class="questionGeneralFormat" id="respuesta3" type="button" value="Respuesta 3">
-                    </div>
-                    <div class="formFlexContainer buttonContainer">
-                        <input id="juegoAyuda" type="button" value="Ayuda">
-                        <input id="juegoSiguiente" type="button" value="Siguiente Pregunta">
-                        <input id="juegoTerminar" type="button" value="Terminar">
-                    </div>
-                </form>
-            </div>
+                <h3 class="noMarginBottom">Configuración</h3>
+                <div class="configContainer">
+                    <form class="formButtons">
+                        <label class="formseccion1" for="jugarTema">Tema</label>
+                        <select class="formseccion2" id="jugarTema" name="Tema">
+                        </select>
+                        <label class="formseccion3" for="jugarNivel">Nivel</label>
+                        <div class="formseccion4">
+                            <input class="numSelector" id="jugarNivel" type="number">
+                            <input class="buttonType" type="button" value="Jugar">
+                        </div>
+                    </form>
+                    <h3>Juego</h3>
+                    <p>Puntaje acummulado en esta Partida: 0</p>
+                    <p>La pregunta es...:</p>
+                    <form>
+                        <p class="questionTitle questionGeneralFormat">TEXTO DE LA PREGUNTA</p>
+                        <div class="formFlexContainer answereContainer">
+                            <input class="questionGeneralFormat" id="respuesta1" type="button" value="Respuesta 1">
+                            <input class="questionGeneralFormat" id="respuesta2" type="button" value="Respuesta 2">
+                            <input class="questionGeneralFormat" id="respuesta3" type="button" value="Respuesta 3">
+                        </div>
+                        <div class="formFlexContainer buttonContainer">
+                            <input id="juegoAyuda" type="button" value="Ayuda">
+                            <input id="juegoSiguiente" type="button" value="Siguiente Pregunta">
+                            <input id="juegoTerminar" type="button" value="Terminar">
+                        </div>
+                    </form>
+                </div>
+            </article>
         </section>
     </body>
 </html>

@@ -93,6 +93,7 @@ figcaption {
     text-align: left;
     padding: 3px;
     margin-left: 3px;
+    height: 100%;
 }
 
 .numSelector {
