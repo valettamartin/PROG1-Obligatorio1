@@ -47,14 +47,12 @@
             <h2>Gestión de temas</h2>
             <article>
                 <h3>Alta de temas</h3>
-                <form>
-                    <div class="formButtons">
-                        <label class="formseccion1" for="temaNombre">Nombre</label>
-                        <input class="formseccion2" type="text" id="temaNombre">
-                        <label class="formseccion3" for="temaDesc">Descripción</label>
-                        <input class="formseccion4" type="text" id="temaDesc">
-                    </div>
-                    <input type="button" value="Agregar">
+                <form class="formButtons">
+                    <label class="formseccion1" for="temaNombre">Nombre</label>
+                    <input class="formseccion2" type="text" id="temaNombre">
+                    <label class="formseccion3" for="temaDesc">Descripción</label>
+                    <input class="formseccion4" type="text" id="temaDesc">
+                    <input type="button" class="formseccion5 buttonType" value="Agregar">
                 </form>
             </article>
             <article>
@@ -72,74 +70,79 @@
             <h2>Gestión de preguntas</h2>
             <article>
                 <h3>Alta de preguntas</h3>
-                <form>
-                    <div class="formButtons">
-                        <label class="formseccion1" for="pregTema">Tema</label>
-                        <select class="formseccion2" id="pregTema" name="Tema">
-                        </select>
-                        <label class="formseccion3" for="pregNivel">Nivel</label>
-                        <input class="formseccion4 numSelector" id="pregNivel" type="number">
-                        <br>
-                        <label class="formseccion8" for="pregText">Texto de la pregunta</label>
-                        <input class="formseccion9" id="pregText" type="text">
-                        <label class="formseccion10" for="pregResp">Respuesta Correcta</label>
-                        <input class="formseccion11" id="pregResp" type="text">
-                        <label class="formseccion12" for="pregIncorr">Respuesta Incorrecta</label>
-                        <input class="formseccion13" id="pregIncorr" type="text">
-                    </div>
-                    <input type="button" value="Agregar">
+                <form class="formButtons">
+                    <label class="formseccion1" for="pregTema">Tema</label>
+                    <select class="formseccion2" id="pregTema" name="Tema">
+                    </select>
+                    <label class="formseccion3" for="pregNivel">Nivel</label>
+                    <input class="formseccion4 numSelector" id="pregNivel" type="number">
+                    <br>
+                    <label class="formseccion8" for="pregText">Texto de la pregunta</label>
+                    <input class="formseccion9" id="pregText" type="text">
+                    <label class="formseccion10" for="pregResp">Respuesta Correcta</label>
+                    <input class="formseccion11" id="pregResp" type="text">
+                    <label class="formseccion12" for="pregIncorr">Respuesta Incorrecta</label>
+                    <input class="formseccion13" id="pregIncorr" type="text">
+                    <input type="button" class="formseccion14 buttonType" value="Agregar">
                 </form>
             </article>
             <article>
                 <h3>Datos generales de preguntas</h3>
                 <p>Total de preguntas registradas: 0 preguntas</p>
                 <p>Maximo puntaje obtenido por un jugador: sin datos</p>
-                <form>
-                    <label>Preguntas registradas:</label>
-                    <input type="radio" id="creciente" checked name="ordenTema">
-                    <label for="creciente">Orden nombre tema creciente/nivel creciente</label>
-                    <input type="radio" value="decreciente" id="decreciente" name="ordenTema">
-                    <label for="decreciente">Orden nombre tema decreciente/nivel creciente</label>
-                </form>
-                <table>
-                    <tr>
-                        <th>Nombre del tema</th>
-                        <th>Nivel</th>
-                        <th>Texto de la pregunta</th>
-                        <th>Respuesta correcta</th>
-                        <th>Respuestas incorrectas</th>
-                    </tr>
-                </table>
+                <div class="tableContainer">
+                    <form>
+                        <label>Preguntas registradas:</label>
+                        <input type="radio" id="creciente" checked name="ordenTema">
+                        <label for="creciente">Orden nombre tema creciente/nivel creciente</label>
+                        <input type="radio" value="decreciente" id="decreciente" name="ordenTema">
+                        <label for="decreciente">Orden nombre tema decreciente/nivel creciente</label>
+                    </form>
+                    <table>
+                        <tr>
+                            <th>Nombre del tema</th>
+                            <th>Nivel</th>
+                            <th>Texto de la pregunta</th>
+                            <th>Respuesta correcta</th>
+                            <th>Respuestas incorrectas</th>
+                        </tr>
+                    </table>
+                </div>
             </article>
         </section>
 
         <section id="jugar">
             <h2>¡A jugar!</h2>
             <article>
-            <h3>Configuración</h3>
-            <form>
-                <div class="formButtons">
+            <h3 class="noMarginBottom">Configuración</h3>
+            <div class="configContainer">
+                <form class="formButtons">
                     <label class="formseccion1" for="jugarTema">Tema</label>
                     <select class="formseccion2" id="jugarTema" name="Tema">
                     </select>
                     <label class="formseccion3" for="jugarNivel">Nivel</label>
-                    <input class="formseccion4 numSelector" id="jugarNivel" type="number">
-                </div>
-                <input class="formseccion5" type="button" value="Jugar">
-            </form>
-            <h3>Juego</h3>
-            <p>Puntaje acummulado en esta Partida: 0</p>
-            <p>La pregunta es...:</p>
-            <p>TEXTO DE LA PREGUNTA</p>
-            <form>
-                <input id="respuesta1" type="button" value="Respuesta 1">
-                <input id="respuesta2" type="button" value="Respuesta 2">
-                <input id="respuesta3" type="button" value="Respuesta 3">
-                <br>
-                <input id="juegoAyuda" type="button" value="Ayuda">
-                <input id="juegoSiguiente" type="button" value="Siguiente Pregunta">
-                <input id="juegoTerminar" type="button" value="Terminar">
-            </form>
+                    <div class="formseccion4">
+                        <input class="numSelector" id="jugarNivel" type="number">
+                        <input class="buttonType" type="button" value="Jugar">
+                    </div>
+                </form>
+                <h3>Juego</h3>
+                <p>Puntaje acummulado en esta Partida: 0</p>
+                <p>La pregunta es...:</p>
+                <form>
+                    <p class="questionTitle questionGeneralFormat">TEXTO DE LA PREGUNTA</p>
+                    <div class="formFlexContainer answereContainer">
+                        <input class="questionGeneralFormat" id="respuesta1" type="button" value="Respuesta 1">
+                        <input class="questionGeneralFormat" id="respuesta2" type="button" value="Respuesta 2">
+                        <input class="questionGeneralFormat" id="respuesta3" type="button" value="Respuesta 3">
+                    </div>
+                    <div class="formFlexContainer buttonContainer">
+                        <input id="juegoAyuda" type="button" value="Ayuda">
+                        <input id="juegoSiguiente" type="button" value="Siguiente Pregunta">
+                        <input id="juegoTerminar" type="button" value="Terminar">
+                    </div>
+                </form>
+            </div>
         </section>
     </body>
 </html>

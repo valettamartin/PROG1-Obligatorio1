@@ -9,6 +9,9 @@ header, #informacion, #administrar, #jugar, h2, h3, p, img {
 
 header {
     background-color: #f9a370;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .flexContainer {
@@ -83,11 +86,79 @@ figcaption {
 .formseccion11 { grid-area: 2 / 4 / 3 / 5; }
 .formseccion12 { grid-area: 2 / 5 / 3 / 6; }
 .formseccion13 { grid-area: 2 / 6 / 3 / 7; } 
+.formseccion14 { grid-area: 2 / 7 / 3 / 8; } 
+
+.buttonType {
+    margin-right: auto;
+    text-align: left;
+    padding: 3px;
+    margin-left: 3px;
+}
 
 .numSelector {
+    height: 100%;
     width: 70px
 }
 
 #jugar {
     background-color: #fddac6;
+}
+
+.tableContainer {
+    border: white solid 1px;
+    padding-top: 10px;
+}
+
+.tableContainer table {
+    width: 99vw;
+    margin-top: 15px;
+    border: black solid 2px;
+    padding-bottom: 75px;
+}
+
+.tableContainer th {
+    border: black solid 1px;
+    background-color: #f2f2f2;
+}
+
+.noMarginBottom {
+    margin-bottom: -3px;
+}
+
+.configContainer {
+    border: white solid 1px;
+    padding-top: 20px;
+}
+
+.questionTitle {
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+.questionGeneralFormat {
+    color: white;
+    background-color: #e87c24;
+    padding: 10px;
+    text-align: center;
+    border: white solid 2px;
+}
+
+.formFlexContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.answereContainer {
+    gap: 20px;
+}
+
+.buttonContainer {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    gap: 5px;
+}
+
+.buttonContainer input {
+    padding: 3px;
 }
