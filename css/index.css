@@ -14,6 +14,11 @@ header {
     z-index: 1;
 }
 
+article {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 .flexContainer {
     display: flex;
     justify-content: center;
@@ -111,7 +116,7 @@ figcaption {
 }
 
 .tableContainer table {
-    width: 99vw;
+    width: 100%;
     margin-top: 15px;
     border: black solid 2px;
     padding-bottom: 75px;
