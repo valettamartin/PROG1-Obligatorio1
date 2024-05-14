@@ -47,7 +47,7 @@
             <h2>Gestión de temas</h2>
             <article>
                 <h3>Alta de temas</h3>
-                <form class="formButtons">
+                <form action="" method="post" class="formButtons">
                     <label class="formseccion1" for="temaNombre">Nombre</label>
                     <input class="formseccion2" type="text" id="temaNombre">
                     <label class="formseccion3" for="temaDesc">Descripción</label>
@@ -70,7 +70,7 @@
             <h2>Gestión de preguntas</h2>
             <article>
                 <h3>Alta de preguntas</h3>
-                <form class="formButtons">
+                <form action="" method="post" class="formButtons">
                     <label class="formseccion1" for="pregTema">Tema</label>
                     <select class="formseccion2" id="pregTema" name="Tema">
                     </select>
@@ -91,7 +91,7 @@
                 <p>Total de preguntas registradas: 0 preguntas</p>
                 <p>Maximo puntaje obtenido por un jugador: sin datos</p>
                 <div class="tableContainer">
-                    <form>
+                    <form action="" method="get">
                         <label>Preguntas registradas:</label>
                         <input type="radio" id="creciente" checked name="ordenTema">
                         <label for="creciente">Orden nombre tema creciente/nivel creciente</label>
@@ -116,7 +116,7 @@
             <article>
                 <h3 class="noMarginBottom">Configuración</h3>
                 <div class="configContainer">
-                    <form class="formButtons">
+                    <form class="formButtons" action="" method="get">
                         <label class="formseccion1" for="jugarTema">Tema</label>
                         <select class="formseccion2" id="jugarTema" name="Tema">
                         </select>
@@ -129,7 +129,7 @@
                     <h3>Juego</h3>
                     <p>Puntaje acummulado en esta Partida: 0</p>
                     <p>La pregunta es...:</p>
-                    <form>
+                    <form action="" method="post">
                         <p class="questionTitle questionGeneralFormat">TEXTO DE LA PREGUNTA</p>
                         <div class="formFlexContainer answereContainer">
                             <input class="questionGeneralFormat" id="respuesta1" type="button" value="Respuesta 1">
