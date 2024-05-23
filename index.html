@@ -1,8 +1,11 @@
-<!-- Elena Couste y Martin Valetta -->
+<!-- 
+    Elena Couste - 333562
+    Martin Valetta - 251093
+-->
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta http-equiv="Content-Type" content="txt/html; charset-utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name = "viewport" content="width-device-width, inicial-scale = 1.0">
         <meta name="description" content="¿Estás listo para poner a prueba tus conocimientos y desafiar a tus amigos en el juego de trivia más emocionante y educativo? Nuestro juego de trivia de cultura general está diseñado para todas las edades y niveles de conocimiento. Con miles de preguntas sobre una amplia variedad de temas, ¡nunca te aburrirás!">
         <meta name="keywords" content="Juego de trivia, Juego de preguntas, trivia en línea, trivia multijugador, preguntas y respuestas">
@@ -50,7 +53,7 @@
             <h2>Gestión de temas</h2>
             <article>
                 <h3>Alta de temas</h3>
-                <form class="formButtons">
+                <form action="" method="post" class="formButtons">
                     <label class="formseccion1" for="temaNombre">Nombre</label>
                     <input class="formseccion2" type="text" id="temaNombre">
                     <label class="formseccion3" for="temaDesc">Descripción</label>
@@ -73,7 +76,7 @@
             <h2>Gestión de preguntas</h2>
             <article>
                 <h3>Alta de preguntas</h3>
-                <form class="formButtons">
+                <form action="" method="post" class="formButtons">
                     <label class="formseccion1" for="pregTema">Tema</label>
                     <select class="formseccion2" id="pregTema" name="Tema">
                     </select>
@@ -94,7 +97,7 @@
                 <p>Total de preguntas registradas: 0 preguntas</p>
                 <p>Maximo puntaje obtenido por un jugador: sin datos</p>
                 <div class="tableContainer">
-                    <form>
+                    <form action="" method="get">
                         <label>Preguntas registradas:</label>
                         <input type="radio" id="creciente" checked name="ordenTema">
                         <label for="creciente">Orden nombre tema creciente/nivel creciente</label>
@@ -117,35 +120,36 @@
         <section id="jugar">
             <h2>¡A jugar!</h2>
             <article>
-            <h3 class="noMarginBottom">Configuración</h3>
-            <div class="configContainer">
-                <form class="formButtons">
-                    <label class="formseccion1" for="jugarTema">Tema</label>
-                    <select class="formseccion2" id="jugarTema" name="Tema">
-                    </select>
-                    <label class="formseccion3" for="jugarNivel">Nivel</label>
-                    <div class="formseccion4">
-                        <input class="numSelector" id="jugarNivel" type="number">
-                        <input class="buttonType" type="button" value="Jugar">
-                    </div>
-                </form>
-                <h3>Juego</h3>
-                <p>Puntaje acummulado en esta Partida: 0</p>
-                <p>La pregunta es...:</p>
-                <form>
-                    <p class="questionTitle questionGeneralFormat">TEXTO DE LA PREGUNTA</p>
-                    <div class="formFlexContainer answereContainer">
-                        <input class="questionGeneralFormat" id="respuesta1" type="button" value="Respuesta 1">
-                        <input class="questionGeneralFormat" id="respuesta2" type="button" value="Respuesta 2">
-                        <input class="questionGeneralFormat" id="respuesta3" type="button" value="Respuesta 3">
-                    </div>
-                    <div class="formFlexContainer buttonContainer">
-                        <input id="juegoAyuda" type="button" value="Ayuda">
-                        <input id="juegoSiguiente" type="button" value="Siguiente Pregunta">
-                        <input id="juegoTerminar" type="button" value="Terminar">
-                    </div>
-                </form>
-            </div>
+                <h3 class="noMarginBottom">Configuración</h3>
+                <div class="configContainer">
+                    <form class="formButtons" action="" method="get">
+                        <label class="formseccion1" for="jugarTema">Tema</label>
+                        <select class="formseccion2" id="jugarTema" name="Tema">
+                        </select>
+                        <label class="formseccion3" for="jugarNivel">Nivel</label>
+                        <div class="formseccion4">
+                            <input class="numSelector" id="jugarNivel" type="number">
+                            <input class="buttonType" type="button" value="Jugar">
+                        </div>
+                    </form>
+                    <h3>Juego</h3>
+                    <p>Puntaje acummulado en esta Partida: 0</p>
+                    <p>La pregunta es...:</p>
+                    <form action="" method="post">
+                        <p class="questionTitle questionGeneralFormat">TEXTO DE LA PREGUNTA</p>
+                        <div class="formFlexContainer answereContainer">
+                            <input class="questionGeneralFormat" id="respuesta1" type="button" value="Respuesta 1">
+                            <input class="questionGeneralFormat" id="respuesta2" type="button" value="Respuesta 2">
+                            <input class="questionGeneralFormat" id="respuesta3" type="button" value="Respuesta 3">
+                        </div>
+                        <div class="formFlexContainer buttonContainer">
+                            <input id="juegoAyuda" type="button" value="Ayuda">
+                            <input id="juegoSiguiente" type="button" value="Siguiente Pregunta">
+                            <input id="juegoTerminar" type="button" value="Terminar">
+                        </div>
+                    </form>
+                </div>
+            </article>
         </section>
     </body>
 </html>

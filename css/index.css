@@ -1,6 +1,12 @@
+/*
+    Martín Valetta - 251093
+    Elena Couste - 333562
+*/
+
 * {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 header, #informacion, #administrar, #jugar, h2, h3, p, img {
@@ -12,6 +18,11 @@ header {
     position: sticky;
     top: 0;
     z-index: 1;
+}
+
+article {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .flexContainer {
@@ -93,6 +104,7 @@ figcaption {
     text-align: left;
     padding: 3px;
     margin-left: 3px;
+    height: 100%;
 }
 
 .numSelector {
@@ -110,7 +122,7 @@ figcaption {
 }
 
 .tableContainer table {
-    width: 99vw;
+    width: 100%;
     margin-top: 15px;
     border: black solid 2px;
     padding-bottom: 75px;
