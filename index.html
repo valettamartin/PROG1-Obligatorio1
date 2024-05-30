@@ -12,6 +12,8 @@
         <meta name="author" content="Elena Couste y Martin Valetta">
         <title>Trivia</title>
         <link rel="stylesheet" href="./css/index.css">
+        <script src="./js/datosPrueba.js"></script>
+        <script src="./js/clases.js"></script>
         <script src="./js/index.js"></script>
     </head>
 
@@ -22,9 +24,9 @@
             </div>
             <nav class="flexContainer">
                 <ul>
-                    <li><a href="#informacion">Información General</a></li>
-                    <li><a href="#administrar">Administrar</a></li>
-                    <li><a href="#jugar">¡Jugar!</a></li>
+                    <li><a href="#informacion" id="irInfo">Información General</a></li>
+                    <li><a href="#administrar" id="irAdmin">Administrar</a></li>
+                    <li><a href="#jugar" id="irJugar">¡Jugar!</a></li>
                 </ul>
             </nav>
         </header>
@@ -56,10 +58,10 @@
                 <h3>Alta de temas</h3>
                 <form action="" method="post" class="formButtons">
                     <label class="formseccion1" for="temaNombre">Nombre</label>
-                    <input class="formseccion2" type="text" id="temaNombre">
+                    <input class="formseccion2" type="text" id="temaNombre" required>
                     <label class="formseccion3" for="temaDesc">Descripción</label>
-                    <input class="formseccion4" type="text" id="temaDesc">
-                    <input type="button" class="formseccion5 buttonType" value="Agregar">
+                    <input class="formseccion4" type="text" id="temaDesc" required>
+                    <input type="button" class="formseccion5 buttonType" value="Agregar" id="agregarTema">
                 </form>
             </article>
             <article>
@@ -82,14 +84,14 @@
                     <select class="formseccion2" id="pregTema" name="Tema">
                     </select>
                     <label class="formseccion3" for="pregNivel">Nivel</label>
-                    <input class="formseccion4 numSelector" id="pregNivel" type="number">
+                    <input class="formseccion4 numSelector" id="pregNivel" type="number" required>
                     <br>
                     <label class="formseccion8" for="pregText">Texto de la pregunta</label>
-                    <input class="formseccion9" id="pregText" type="text">
+                    <input class="formseccion9" id="pregText" type="text" required>
                     <label class="formseccion10" for="pregResp">Respuesta Correcta</label>
-                    <input class="formseccion11" id="pregResp" type="text">
+                    <input class="formseccion11" id="pregResp" type="text" required>
                     <label class="formseccion12" for="pregIncorr">Respuesta Incorrecta</label>
-                    <input class="formseccion13" id="pregIncorr" type="text">
+                    <input class="formseccion13" id="pregIncorr" type="text" required>
                     <input type="button" class="formseccion14 buttonType" value="Agregar">
                 </form>
             </article>
@@ -124,12 +126,12 @@
                 <h3 class="noMarginBottom">Configuración</h3>
                 <div class="configContainer">
                     <form class="formButtons" action="" method="get">
-                        <label class="formseccion1" for="jugarTema">Tema</label>
-                        <select class="formseccion2" id="jugarTema" name="Tema">
+                        <label class="formseccion1" for="jugarTema">Tema a elegir:</label>
+                        <select class="formseccion2" id="jugarTema" name="Tema" required>
                         </select>
-                        <label class="formseccion3" for="jugarNivel">Nivel</label>
+                        <label class="formseccion3" for="jugarNivel">Nivel del juego:</label>
                         <div class="formseccion4">
-                            <input class="numSelector" id="jugarNivel" type="number">
+                            <input class="numSelector" id="jugarNivel" type="number" required>
                             <input class="buttonType" type="button" value="Jugar">
                         </div>
                     </form>

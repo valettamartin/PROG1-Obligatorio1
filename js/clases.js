@@ -1,18 +1,20 @@
-export class sistema {
+class sistema {
 	constructor() {}
 }
 
-export class tema {
-	constructor(nombre, nivel) {
+class tema {
+	constructor(nombre, descripcion) {
 		this.nombre = nombre;
-		this.nivel = nivel;
+		this.descripcion = descripcion;
 	}
 }
 
-export class pegunta {
-	constructor(pregunta, correcta, incorrecta) {
-		this.pregunta = pregunta;
-		this.correcta = correcta;
-		this.incorrecta = incorrecta;
+class pegunta {
+	constructor(texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema) {
+		this.texto = texto;
+		this.respuestaCorrecta = respuestaCorrecta;
+		this.respuestasIncorrectas = respuestasIncorrectas;
+		this.nivel = nivel;
+		this.tema = tema;
 	}
 }

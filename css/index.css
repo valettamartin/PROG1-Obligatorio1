@@ -4,8 +4,6 @@
 */
 
 * {
-    margin: 0;
-    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -52,6 +50,7 @@ h3 {
 
 #informacion {
     background-color: #f6f1db;
+    display: none;
 }
 
 .alumnos, figure {
@@ -76,6 +75,7 @@ figcaption {
 
 #administrar {
     background-color: #ffd488;
+    display: none;
 }
 
 .formButtons {
@@ -114,6 +114,7 @@ figcaption {
 
 #jugar {
     background-color: #fddac6;
+    display: none;
 }
 
 .tableContainer {
