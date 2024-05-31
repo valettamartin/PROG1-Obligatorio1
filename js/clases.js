@@ -1,5 +1,8 @@
 class sistema {
-	constructor() {}
+	constructor() {
+		this.listaTemas = [];
+		this.listaPreguntas = [];
+	}
 }
 
 class tema {

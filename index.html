@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="./css/index.css">
         <script src="./js/datosPrueba.js"></script>
         <script src="./js/clases.js"></script>
-        <script src="./js/index.js"></script>
+        <script src="./js/funciones.js"></script>
     </head>
 
     <body>
@@ -56,7 +56,7 @@
             <h2>Gestión de temas</h2>
             <article>
                 <h3>Alta de temas</h3>
-                <form action="" method="post" class="formButtons">
+                <form action="" method="post" class="formButtons" id="altaTemas">
                     <label class="formseccion1" for="temaNombre">Nombre</label>
                     <input class="formseccion2" type="text" id="temaNombre" required>
                     <label class="formseccion3" for="temaDesc">Descripción</label>
@@ -67,24 +67,24 @@
             <article>
                 <h3>Datos generales de temas</h3>
                 <p>Lista de temas (total de temas: 0)</p>
-                <ul>
+                <ul id="listaTemas">
                     <li>Sin datos</li>
                 </ul>
                 <p>Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): sin datos</p>
                 <p>Temas sin preguntas</p>
-                <ul>
+                <ul id="listaTemaNoPreg">
                     <li>Sin datos</li>
                 </ul>
             </article>
             <h2>Gestión de preguntas</h2>
             <article>
                 <h3>Alta de preguntas</h3>
-                <form action="" method="post" class="formButtons">
+                <form action="" method="post" class="formButtons" id="altaPreg">
                     <label class="formseccion1" for="pregTema">Tema</label>
                     <select class="formseccion2" id="pregTema" name="Tema">
                     </select>
                     <label class="formseccion3" for="pregNivel">Nivel</label>
-                    <input class="formseccion4 numSelector" id="pregNivel" type="number" required>
+                    <input class="formseccion4 numSelector" id="pregNivel" type="number" required min="1" max="5">
                     <br>
                     <label class="formseccion8" for="pregText">Texto de la pregunta</label>
                     <input class="formseccion9" id="pregText" type="text" required>
@@ -92,7 +92,7 @@
                     <input class="formseccion11" id="pregResp" type="text" required>
                     <label class="formseccion12" for="pregIncorr">Respuesta Incorrecta</label>
                     <input class="formseccion13" id="pregIncorr" type="text" required>
-                    <input type="button" class="formseccion14 buttonType" value="Agregar">
+                    <input type="button" class="formseccion14 buttonType" value="Agregar" id="agregarPreg">
                 </form>
             </article>
             <article>
@@ -107,7 +107,7 @@
                         <input type="radio" value="decreciente" id="decreciente" name="ordenTema">
                         <label for="decreciente">Orden nombre tema decreciente/nivel creciente</label>
                     </form>
-                    <table>
+                    <table id="tablaPreguntas">
                         <tr>
                             <th>Nombre del tema</th>
                             <th>Nivel</th>
