@@ -101,7 +101,7 @@ function nuevaPregunta() {
 }
 
 function añadirPregunta(tema, nivel, texto, correcto, incorrecto) {
-	let nuevaPregunta = new preguntas(tema, nivel, texto, correcto, incorrecto);
+	let nuevaPregunta = new pregunta(tema, nivel, texto, correcto, incorrecto);
 	MiSistema.listaPreguntas.push(nuevaPregunta);
 
 	let newTr = document.createElement("tr");
