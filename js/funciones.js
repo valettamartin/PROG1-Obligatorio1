@@ -13,7 +13,9 @@ function innit() {
 	jugar.addEventListener("click", () => divManager(jugar));
 
 	document.getElementById("agregarTema").addEventListener("click", nuevoTema);
-	document.getElementById("agregarPreg").addEventListener("click", nuevaPregunta);
+	document
+		.getElementById("agregarPreg")
+		.addEventListener("click", nuevaPregunta);
 }
 
 function deseaCargarDatos() {
@@ -21,7 +23,9 @@ function deseaCargarDatos() {
 	let loop = true;
 
 	while (loop == true) {
-		loadYesOrNo = prompt("¿Desea utilizar los datos precargados? Ingrese s/n.");
+		loadYesOrNo = prompt(
+			"¿Desea utilizar los datos precargados? Ingrese s/n."
+		);
 		loadYesOrNo = loadYesOrNo.toLocaleLowerCase();
 
 		if (loadYesOrNo != "s" && loadYesOrNo != "n") {
@@ -33,7 +37,6 @@ function deseaCargarDatos() {
 		}
 	}
 }
-
 
 function divManager(selectedButton) {
 	switch (selectedButton) {
@@ -57,25 +60,23 @@ function divManager(selectedButton) {
 	}
 }
 
-
 function nuevoTema() {
 	let descripcion = document.getElementById("temaDesc").value;
 	let nombre = document.getElementById("temaNombre").value;
 
-	if (MiSistema.listaTemas.some(tema => tema.nombre == nombre)) {
-		alert("¡Este tema ya existe!")
+	if (MiSistema.listaTemas.some((tema) => tema.nombre == nombre)) {
+		alert("¡Este tema ya existe!");
 	} else {
-		añadirTema(nombre, descripcion)
+		añadirTema(nombre, descripcion);
 	}
 }
 
-
 function añadirTema(nombreUsar, descripcionUsar) {
 	let nuevoTema = new tema(nombreUsar, descripcionUsar);
-	MiSistema.listaTemas.push(nuevoTema)
+	MiSistema.listaTemas.push(nuevoTema);
 
 	let newOption = document.createElement("option");
-	let newLi = document.createElement("li");	
+	let newLi = document.createElement("li");
 
 	newLi.innerText = nombreUsar;
 	newOption.innerText = nombreUsar;
@@ -85,22 +86,21 @@ function añadirTema(nombreUsar, descripcionUsar) {
 	document.getElementById("altaTemas").reset();
 }
 
-
 function nuevaPregunta() {
-	let tema = document.getElementById("pregTema").value; 
+	let tema = document.getElementById("pregTema").value;
 	let nivel = document.getElementById("pregNivel").value;
 	let texto = document.getElementById("pregText").value;
 	let correcto = document.getElementById("pregResp").value;
 	let incorrecto = document.getElementById("pregIncorr").value;
 
-	if (MiSistema.listaPreguntas.some(tema => tema.texto == texto)) {
-		alert("¡Esta pregunta ya existe!")
+	if (MiSistema.listaPreguntas.some((tema) => tema.texto == texto)) {
+		alert("¡Esta pregunta ya existe!");
 	} else {
 		añadirPregunta(tema, nivel, texto, correcto, incorrecto);
 	}
 }
 
-function añadirPregunta() {
+function añadirPregunta(tema, nivel, texto, correcto, incorrecto) {
 	let nuevaPregunta = new preguntas(tema, nivel, texto, correcto, incorrecto);
 	MiSistema.listaPreguntas.push(nuevaPregunta);
 
