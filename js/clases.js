@@ -12,7 +12,7 @@ class tema {
 	}
 }
 
-class pegunta {
+class pregunta {
 	constructor(texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema) {
 		this.texto = texto;
 		this.respuestaCorrecta = respuestaCorrecta;
