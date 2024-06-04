@@ -62,13 +62,52 @@ function agregarTema() {
 	let newNombre = document.getElementById("temaNombre").value
 	let newDescripcion = document.getElementById("temaDesc").value
 
-	MiSistema.agregarTema(newNombre, newDescripcion);
-	document.getElementById("altaTemas").reset()
+	let exito = MiSistema.agregarTema(newNombre, newDescripcion);
+
+	if (exito == true) {
+		document.getElementById("altaTemas").reset()
+		actualizarTemas()
+	}
+}
+
+function actualizarTemas() {
+	let temas = MiSistema.listaTemas;
+
+	document.getElementById("pregTema").innerHTML = "";
+	document.getElementById("listaTemas").innerHTML = "";
+
+	for (let i=0 ; i<temas.length ; i++) {
+		let newOption = document.createElement("option");
+		newOption.setAttribute("value", temas[i]);
+		newOption.innerText = temas[i].nombre;
+		document.getElementById("pregTema").appendChild(newOption)
+
+		//ARREGLAR: NO HACE NADA
+		if (MiSistema.hayPreguntas == true) {
+			document.getElementById("listaTemasVacia").style.display = "none";
+	
+			let newLi = document.createElement("li")
+			newLi.innerText = temas[i];
+			document.getElementById("listaTemas").appendChild(newLi)
+		}
+	}
 }
 
 function agregarPregunta() {
 	let newTexto = document.getElementById("pregText").value;
 	let newRespuestaC = document.getElementById("pregResp").value;
 	let newRespuestaI = document.getElementById("pregIncorr").value;
-	let newNivel = document.getElementById("pregNivel");
+	let newNivel = document.getElementById("pregNivel").value;
+	let newTema = document.getElementById("pregTema").value;
+	
+	let exito = MiSistema.agregarPregunta(newTexto, newRespuestaC, newRespuestaI, newNivel, newTema);
+
+	if (exito == true) {
+		document.getElementById("altaPreg").reset()
+		actualizarPreguntas()
+	}
+}
+
+function actualizarPreguntas() {
+
 }

@@ -7,19 +7,19 @@ class sistema {
 	}
 
 	hayTemas() {
-		return this.listaTemas.length == 0
+		return this.listaTemas.length != 0
 	}
 
 	hayPreguntas() {
-		return this.listaPreguntas.length == 0
+		return this.listaPreguntas.length != 0
 	}
 
 	hayPuntuaciones() {
-		return this.listaPuntuaciones.length == 0
+		return this.listaPuntuaciones.length != 0
 	}
 
 	agregarTema(useNombre, useDescripcion) {
-
+		let exito = false;
 		let repetido = false;
 		let vacio = false;
 
@@ -40,11 +40,14 @@ class sistema {
 		} else {
 			let nuevoTema = new tema(useNombre, useDescripcion);
 			this.listaTemas.push(nuevoTema);
+			exito = true;
 		}
+
+		return exito
 	}
 
 	agregarPregunta(useTexto, useRespuestaC, useRespuestaI, useNivel, useTema) {
-
+		let exito = false;
 		let repetido = false;
 		let vacio = false;
 		let valido = true;
@@ -62,20 +65,20 @@ class sistema {
 			nivel = false;
 		}
 
-		for (i=0 ; (i<this.listaPreguntas.length) && (repetido == false) && (valido == true) && (vacio == false); i++) {
+		for (let i=0 ; (i<this.listaPreguntas.length) && (repetido == false) && (valido == true) && (vacio == false); i++) {
 			if (this.listaPreguntas[i].texto == useTexto) {
 				repetido = true;
 			}
 		}
 
-		if (valido == false) {
-			alert ("¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas.")
-		} else if(vacio == true) {
+		if(vacio == true) {
 			alert ("¡No se puede añadir la pregunta! No se ha ingresado uno de los datos requeridos.")
 		} else if(repetido == true) {
 			alert ("¡No se puede añadir la pregunta! Ya existe una pregunta con este texto.")
 		} else if(nivel == false) {
 			alert ("¡No se puede añadir la pregunta! El nivel ingresado debe ser entre 1 y 5.")
+		} else if (valido == false) {
+			alert ("¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas.")
 		} else {
 			let useRespuestaILista = [];
 			let found = true;
@@ -92,9 +95,10 @@ class sistema {
 			}
 			let nuevaPregunta = new pregunta(useTexto, useRespuestaC, useRespuestaILista, useNivel, useTema);
 			this.listaPreguntas.push(nuevaPregunta);
-			this.contarPreguntas();
+			exito = true;
 		}
 
+		return exito
 	}
 
 	agregarPuntuacion(usePuntuacion) {
