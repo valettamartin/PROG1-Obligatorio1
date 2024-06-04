@@ -83,11 +83,11 @@ function actualizarTemas() {
 		document.getElementById("pregTema").appendChild(newOption)
 
 		//ARREGLAR: NO HACE NADA
-		if (MiSistema.hayPreguntas == true) {
+		if (MiSistema.hayTemas() == true) {
 			document.getElementById("listaTemasVacia").style.display = "none";
 	
 			let newLi = document.createElement("li")
-			newLi.innerText = temas[i];
+			newLi.innerText = temas[i].nombre;
 			document.getElementById("listaTemas").appendChild(newLi)
 		}
 	}
