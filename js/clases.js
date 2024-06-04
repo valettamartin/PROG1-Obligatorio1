@@ -3,14 +3,19 @@ class sistema {
 	constructor() {
 		this.listaTemas = [];
 		this.listaPreguntas = [];
+		this.listaPuntuaciones = [];
 	}
 
 	hayTemas() {
-		return this.listaTemas.length = 0
+		return this.listaTemas.length == 0
 	}
 
 	hayPreguntas() {
-		return this.listaPreguntas.length = 0
+		return this.listaPreguntas.length == 0
+	}
+
+	hayPuntuaciones() {
+		return this.listaPuntuaciones.length == 0
 	}
 
 	agregarTema(useNombre, useDescripcion) {
@@ -22,7 +27,7 @@ class sistema {
 			vacio = true;
 		}
 
-		for (i=0 ; (i<this.listaTemas.length) && (repetido == false) && (vacio == false) ; i++) {
+		for (let i=0 ; (i<this.listaTemas.length) && (repetido == false) && (vacio == false) ; i++) {
 			if (this.listaTemas[i].nombre == useNombre) {
 				repetido = true;
 			}
@@ -72,15 +77,60 @@ class sistema {
 		} else if(nivel == false) {
 			alert ("¡No se puede añadir la pregunta! El nivel ingresado debe ser entre 1 y 5.")
 		} else {
-			let nuevaPregunta = new pregunta(useTexto, useRespuestaC, useRespuestaI, useNivel, useTema);
+			let useRespuestaILista = [];
+			let found = true;
+			while (found == true) {
+				if (useRespuestaI.includes(",")) {
+					let index = useRespuestaI.indexOf(",");
+					let pushRespuesta = useRespuestaI.slice(0,index);
+					useRespuestaILista.push(pushRespuesta);
+					useRespuestaI = useRespuestaI.slice(index+2)
+				} else {
+					useRespuestaILista.push(useRespuestaI);
+					found = false;
+				}
+			}
+			let nuevaPregunta = new pregunta(useTexto, useRespuestaC, useRespuestaILista, useNivel, useTema);
 			this.listaPreguntas.push(nuevaPregunta);
+			this.contarPreguntas();
 		}
 
+	}
+
+	agregarPuntuacion(usePuntuacion) {
+		this.listaPuntuaciones.push(usePuntuacion);
+	}
+
+	contarPreguntas() {
+		return this.listaPreguntas.length
 	}
 
 	sortPreguntasTemaCrNivelCr() {}
 
 	sortPreguntasTemaDeNivelCr() {}
+
+	promedioPuntuaciones() {
+		let promedio = 0;
+
+		for (i=0 ; i<this.listaPuntuaciones.length ; i++) {
+			promedio += parseInt(this.listaPuntuaciones[i]);
+		}
+
+		promedio = promedio / this.listaPuntuaciones.length;
+		return Number.parseFloat(promedio).toFixed(2)
+	}
+
+	listarTemasConPreguntas() {
+		let temas = [];
+
+		for (let question of this.listaPreguntas) {
+			if (temas.includes(question.tema) == false) {
+				temas.push(question.tema);
+			}
+		}
+
+		return temas
+	}
 
 }
 

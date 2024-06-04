@@ -11,6 +11,9 @@ function innit() {
 	info.addEventListener("click", () => divManager(info));
 	admin.addEventListener("click", () => divManager(admin));
 	jugar.addEventListener("click", () => divManager(jugar));
+
+	document.getElementById("agregarTema").addEventListener("click",agregarTema)
+	document.getElementById("agregarPreg").addEventListener("click",agregarPregunta)
 }
 
 function deseaCargarDatos() {
@@ -53,4 +56,19 @@ function divManager(selectedButton) {
 			document.getElementById("jugar").style.display = "block";
 			break;
 	}
+}
+
+function agregarTema() {
+	let newNombre = document.getElementById("temaNombre").value
+	let newDescripcion = document.getElementById("temaDesc").value
+
+	MiSistema.agregarTema(newNombre, newDescripcion);
+	document.getElementById("altaTemas").reset()
+}
+
+function agregarPregunta() {
+	let newTexto = document.getElementById("pregText").value;
+	let newRespuestaC = document.getElementById("pregResp").value;
+	let newRespuestaI = document.getElementById("pregIncorr").value;
+	let newNivel = document.getElementById("pregNivel");
 }
