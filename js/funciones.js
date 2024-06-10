@@ -84,8 +84,6 @@ function actualizarTemas() {
 	pregs.innerHTML = "";
 	let totalTemas = document.getElementById("totalTemas");
 	totalTemas.innerHTML = "";
-	//document.getElementById("pregTema").innerHTML = "";
-	//document.getElementById("listaTemas").innerHTML = "";
 
 	for (let i = 0; i < temas.length; i++) {
 		cantTemas++;
@@ -94,7 +92,6 @@ function actualizarTemas() {
 		newOption.innerText = temas[i].nombre;
 		document.getElementById("pregTema").appendChild(newOption);
 
-		//ARREGLAR: NO HACE NADA
 		if (MiSistema.hayTemas() == true) {
 			document.getElementById("listaTemasVacia").style.display = "none";
 
