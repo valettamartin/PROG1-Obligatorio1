@@ -76,16 +76,19 @@ function agregarTema() {
 
 function actualizarTemas() {
 	let temas = MiSistema.listaTemas;
-
+	let cantTemas = 0;
+	let texto = "";
 	let listaDeTemas = document.getElementById("listaTemas");
 	listaDeTemas.innerHTML = "";
 	let pregs = document.getElementById("pregTema");
 	pregs.innerHTML = "";
-
+	let totalTemas = document.getElementById("totalTemas");
+	totalTemas.innerHTML = "";
 	//document.getElementById("pregTema").innerHTML = "";
 	//document.getElementById("listaTemas").innerHTML = "";
 
 	for (let i = 0; i < temas.length; i++) {
+		cantTemas++;
 		let newOption = document.createElement("option");
 		newOption.setAttribute("value", temas[i]);
 		newOption.innerText = temas[i].nombre;
@@ -102,6 +105,9 @@ function actualizarTemas() {
 			document.getElementById("listaTemas").appendChild(newLi);
 		}
 	}
+	texto = "Lista de temas (total de temas: " + cantTemas + ")";
+	let objtext = document.createTextNode(texto);
+	totalTemas.appendChild(objtext);
 }
 
 function agregarPregunta() {
