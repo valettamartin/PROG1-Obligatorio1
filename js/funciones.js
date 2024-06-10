@@ -12,8 +12,12 @@ function innit() {
 	admin.addEventListener("click", () => divManager(admin));
 	jugar.addEventListener("click", () => divManager(jugar));
 
-	document.getElementById("agregarTema").addEventListener("click",agregarTema)
-	document.getElementById("agregarPreg").addEventListener("click",agregarPregunta)
+	document
+		.getElementById("agregarTema")
+		.addEventListener("click", agregarTema);
+	document
+		.getElementById("agregarPreg")
+		.addEventListener("click", agregarPregunta);
 }
 
 function deseaCargarDatos() {
@@ -59,36 +63,43 @@ function divManager(selectedButton) {
 }
 
 function agregarTema() {
-	let newNombre = document.getElementById("temaNombre").value
-	let newDescripcion = document.getElementById("temaDesc").value
+	let newNombre = document.getElementById("temaNombre").value;
+	let newDescripcion = document.getElementById("temaDesc").value;
 
 	let exito = MiSistema.agregarTema(newNombre, newDescripcion);
 
 	if (exito == true) {
-		document.getElementById("altaTemas").reset()
-		actualizarTemas()
+		document.getElementById("altaTemas").reset();
+		actualizarTemas();
 	}
 }
 
 function actualizarTemas() {
 	let temas = MiSistema.listaTemas;
 
-	document.getElementById("pregTema").innerHTML = "";
-	document.getElementById("listaTemas").innerHTML = "";
+	let listaDeTemas = document.getElementById("listaTemas");
+	listaDeTemas.innerHTML = "";
+	let pregs = document.getElementById("pregTema");
+	pregs.innerHTML = "";
 
-	for (let i=0 ; i<temas.length ; i++) {
+	//document.getElementById("pregTema").innerHTML = "";
+	//document.getElementById("listaTemas").innerHTML = "";
+
+	for (let i = 0; i < temas.length; i++) {
 		let newOption = document.createElement("option");
 		newOption.setAttribute("value", temas[i]);
 		newOption.innerText = temas[i].nombre;
-		document.getElementById("pregTema").appendChild(newOption)
+		document.getElementById("pregTema").appendChild(newOption);
 
 		//ARREGLAR: NO HACE NADA
 		if (MiSistema.hayTemas() == true) {
 			document.getElementById("listaTemasVacia").style.display = "none";
-	
-			let newLi = document.createElement("li")
-			newLi.innerText = temas[i].nombre;
-			document.getElementById("listaTemas").appendChild(newLi)
+
+			let t = MiSistema.listaTemas[i].nombre;
+			let newLi = document.createElement("li");
+			let newLitext = document.createTextNode(t);
+			newLi.appendChild(newLitext);
+			document.getElementById("listaTemas").appendChild(newLi);
 		}
 	}
 }
@@ -99,15 +110,19 @@ function agregarPregunta() {
 	let newRespuestaI = document.getElementById("pregIncorr").value;
 	let newNivel = document.getElementById("pregNivel").value;
 	let newTema = document.getElementById("pregTema").value;
-	
-	let exito = MiSistema.agregarPregunta(newTexto, newRespuestaC, newRespuestaI, newNivel, newTema);
+
+	let exito = MiSistema.agregarPregunta(
+		newTexto,
+		newRespuestaC,
+		newRespuestaI,
+		newNivel,
+		newTema
+	);
 
 	if (exito == true) {
-		document.getElementById("altaPreg").reset()
-		actualizarPreguntas()
+		document.getElementById("altaPreg").reset();
+		actualizarPreguntas();
 	}
 }
 
-function actualizarPreguntas() {
-
-}
+function actualizarPreguntas() {}
