@@ -145,13 +145,25 @@ class sistema {
 
 	sortPreguntasTemaCrNivelCr() {
 		this.listaPreguntas.sort(function (a, b) {
-			return a.nivel - b.nivel;
+			let temaA = a.tema.toString();
+			let temaB = b.tema.toString();
+			let ret = temaA.localeCompare(temaB);
+			if (ret == 0) {
+				ret = a.nivel - b.nivel;
+			}
+			return ret;
 		});
 	}
 
 	sortPreguntasTemaDeNivelDcr() {
 		this.listaPreguntas.sort(function (a, b) {
-			return b.nivel - a.nivel;
+			let temaA = a.tema.toString();
+			let temaB = b.tema.toString();
+			let retd = temaA.localeCompare(temaB);
+			if (retd == 0) {
+				retd = b.nivel - a.nivel;
+			}
+			return retd;
 		});
 	}
 
