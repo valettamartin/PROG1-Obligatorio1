@@ -212,9 +212,9 @@ function promedioPregTemas() {
 	if (MiSistema.hayPreguntas() == true) {
 		cantPreg = MiSistema.contarPreguntas();
 		for (let i = 0; i < p.length; i++) {
-			if (!listaDeTemas.includes(p[i].tema)) {
+			if (listaDeTemas.includes(p[i].tema.nombre) == false) {
 				cantTemas++;
-				listaDeTemas.push(p[i].tema);
+				listaDeTemas.push(p[i].tema.nombre);
 			}
 		}
 		promedio = cantPreg / cantTemas;
