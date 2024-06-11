@@ -12,10 +12,18 @@ function innit() {
 	admin.addEventListener("click", () => divManager(admin));
 	jugar.addEventListener("click", () => divManager(jugar));
 
-	document.getElementById("agregarTema").addEventListener("click", agregarTema);
-	document.getElementById("agregarPreg").addEventListener("click", agregarPregunta);
-	document.getElementById("creciente").addEventListener("click", actualizarPreguntas);
-	document.getElementById("decreciente").addEventListener("click", actualizarPreguntas);
+	document
+		.getElementById("agregarTema")
+		.addEventListener("click", agregarTema);
+	document
+		.getElementById("agregarPreg")
+		.addEventListener("click", agregarPregunta);
+	document
+		.getElementById("creciente")
+		.addEventListener("click", actualizarPreguntas);
+	document
+		.getElementById("decreciente")
+		.addEventListener("click", actualizarPreguntas);
 }
 
 function deseaCargarDatos() {
@@ -123,11 +131,12 @@ function agregarPregunta() {
 	if (exito == true) {
 		document.getElementById("altaPreg").reset();
 		actualizarPreguntas();
+		temaSinPregunta();
 	}
 }
 
 function actualizarPreguntas() {
-	ordenarTabla()
+	ordenarTabla();
 	let vaciarTabla = document.getElementById("tablaPreguntasBody");
 	vaciarTabla.innerHTML = "";
 	let preguntas = MiSistema.listaPreguntas;
@@ -158,7 +167,7 @@ function actualizarPreguntas() {
 	textoP = "Total de preguntas registradas: " + cantPreg + " preguntas";
 	let objtextP = document.createTextNode(textoP);
 	totalPreg.appendChild(objtextP);
-	promedioPregTemas()
+	promedioPregTemas();
 }
 
 //FALTA//function agregarPuntuacion() {}
@@ -215,5 +224,30 @@ function promedioPregTemas() {
 			promedio;
 		let objtextProm = document.createTextNode(texto);
 		pregPorTema.appendChild(objtextProm);
+	}
+}
+
+function temaSinPregunta() {
+	let p = MiSistema.listaPreguntas;
+	let t = MiSistema.listaTemas;
+	let listaTemaSinPregunta = document.getElementById("listaTemaNoPreg");
+	listaTemaSinPregunta.innerHTML = "";
+
+	if (MiSistema.hayTemas() == true) {
+		for (let i = 0; i < t.length; i++) {
+			let esta = false;
+			for (let j = 0; j < p.length; j++) {
+				if (t[i].nombre == p[j].tema.nombre) {
+					esta = true;
+				}
+			}
+
+			if (esta == false) {
+				let newLi = document.createElement("li");
+				let newLitext = document.createTextNode(t[i].nombre);
+				newLi.appendChild(newLitext);
+				document.getElementById("listaTemaNoPreg").appendChild(newLi);
+			}
+		}
 	}
 }
