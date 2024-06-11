@@ -12,12 +12,10 @@ function innit() {
 	admin.addEventListener("click", () => divManager(admin));
 	jugar.addEventListener("click", () => divManager(jugar));
 
-	document
-		.getElementById("agregarTema")
-		.addEventListener("click", agregarTema);
-	document
-		.getElementById("agregarPreg")
-		.addEventListener("click", agregarPregunta);
+	document.getElementById("agregarTema").addEventListener("click", agregarTema);
+	document.getElementById("agregarPreg").addEventListener("click", agregarPregunta);
+	document.getElementById("creciente").addEventListener("click", actualizarPreguntas);
+	document.getElementById("decreciente").addEventListener("click", actualizarPreguntas);
 }
 
 function deseaCargarDatos() {
@@ -124,13 +122,12 @@ function agregarPregunta() {
 
 	if (exito == true) {
 		document.getElementById("altaPreg").reset();
-		ordenarTabla();
 		actualizarPreguntas();
-		promedioPregTemas();
 	}
 }
 
 function actualizarPreguntas() {
+	ordenarTabla()
 	let vaciarTabla = document.getElementById("tablaPreguntasBody");
 	vaciarTabla.innerHTML = "";
 	let preguntas = MiSistema.listaPreguntas;
@@ -161,6 +158,7 @@ function actualizarPreguntas() {
 	textoP = "Total de preguntas registradas: " + cantPreg + " preguntas";
 	let objtextP = document.createTextNode(textoP);
 	totalPreg.appendChild(objtextP);
+	promedioPregTemas()
 }
 
 //FALTA//function agregarPuntuacion() {}
