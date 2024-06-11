@@ -138,9 +138,9 @@ function actualizarPreguntas() {
 	for (let i = 0; i < preguntas.length; i++) {
 		cantPreg++;
 
-		/* ...if (MiSistema.hayPreguntas() == true) {
-		    let objTablaPreg = document.getElementById("tablaPreguntas");
-			let objFila = objFila.insertRow();
+		if (MiSistema.hayPreguntas() == true) {
+			let objTablaPreg = document.getElementById("tablaPreguntas");
+			let objFila = objTablaPreg.insertRow();
 			let celdaTema = objFila.insertCell();
 			celdaTema.innerHTML = preguntas[i].tema;
 			let celdaNivel = objFila.insertCell();
@@ -151,9 +151,7 @@ function actualizarPreguntas() {
 			celdaCorrecta.innerHTML = preguntas[i].respuestaCorrecta;
 			let celdaIncorrecta = objFila.insertCell();
 			celdaIncorrecta.innerHTML = preguntas[i].respuestasIncorrectas;
-
-			objTablaPreg.appendChild(objFila);
-		}*/
+		}
 	}
 
 	textoP = "Total de preguntas registradas: " + cantPreg + " preguntas";
