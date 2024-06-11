@@ -128,4 +128,56 @@ function agregarPregunta() {
 	}
 }
 
-function actualizarPreguntas() {}
+function actualizarPreguntas() {
+	let preguntas = MiSistema.listaPreguntas;
+	let totalPreg = document.getElementById("totalPreg");
+	totalPreg.innerHTML = "";
+	let cantPreg = 0;
+	let textoP = "";
+
+	for (let i = 0; i < preguntas.length; i++) {
+		cantPreg++;
+
+		/* ...if (MiSistema.hayPreguntas() == true) {
+		    let objTablaPreg = document.getElementById("tablaPreguntas");
+			let objFila = objFila.insertRow();
+			let celdaTema = objFila.insertCell();
+			celdaTema.innerHTML = preguntas[i].tema;
+			let celdaNivel = objFila.insertCell();
+			celdaNivel.innerHTML = preguntas[i].nivel;
+			let celdaPregunta = objFila.insertCell();
+			celdaPregunta.innerHTML = preguntas[i].texto;
+			let celdaCorrecta = objFila.insertCell();
+			celdaCorrecta.innerHTML = preguntas[i].respuestaCorrecta;
+			let celdaIncorrecta = objFila.insertCell();
+			celdaIncorrecta.innerHTML = preguntas[i].respuestasIncorrectas;
+
+			objTablaPreg.appendChild(objFila);
+		}*/
+	}
+
+	textoP = "Total de preguntas registradas: " + cantPreg + " preguntas";
+	let objtextP = document.createTextNode(textoP);
+	totalPreg.appendChild(objtextP);
+}
+
+function agregarPuntuacion() {}
+
+function actualizarPuntuacion() {
+	let puntuacion = MiSistema.listaPuntuaciones;
+	let maxPuntaje = document.getElementById("maxpuntaje");
+	maxPuntaje.innerHTML = "";
+	let maximo = 0;
+	let textoPuntaje = "";
+
+	for (let i = 0; i < puntuacion.length; i++) {
+		let puntaje = puntuacion[i];
+		if (puntaje > maximo) {
+			maximo = puntaje;
+		}
+	}
+
+	textoPuntaje = "Maximo puntaje obtenido por un jugador: " + maximo;
+	let objtextPuntaje = document.createTextNode(textoPuntaje);
+	maxPuntaje.appendChild(objtextPuntaje);
+}
