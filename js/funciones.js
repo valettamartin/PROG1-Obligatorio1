@@ -88,7 +88,7 @@ function actualizarTemas() {
 	for (let i = 0; i < temas.length; i++) {
 		cantTemas++;
 		let newOption = document.createElement("option");
-		newOption.setAttribute("value", temas[i]);
+		newOption.setAttribute("value", JSON.stringify(temas[i]));
 		newOption.innerText = temas[i].nombre;
 		document.getElementById("pregTema").appendChild(newOption);
 
@@ -112,15 +112,9 @@ function agregarPregunta() {
 	let newRespuestaC = document.getElementById("pregResp").value;
 	let newRespuestaI = document.getElementById("pregIncorr").value;
 	let newNivel = document.getElementById("pregNivel").value;
-	let newTema = document.getElementById("pregTema").value;
+	let newTema = JSON.parse(document.getElementById("pregTema").value);
 
-	let exito = MiSistema.agregarPregunta(
-		newTexto,
-		newRespuestaC,
-		newRespuestaI,
-		newNivel,
-		newTema
-	);
+	let exito = MiSistema.agregarPregunta(newTexto, newRespuestaC, newRespuestaI, newNivel, newTema);
 
 	if (exito == true) {
 		document.getElementById("altaPreg").reset();
@@ -142,7 +136,7 @@ function actualizarPreguntas() {
 			let objTablaPreg = document.getElementById("tablaPreguntas");
 			let objFila = objTablaPreg.insertRow();
 			let celdaTema = objFila.insertCell();
-			celdaTema.innerHTML = preguntas[i].tema;
+			celdaTema.innerHTML = preguntas[i].tema.nombre;
 			let celdaNivel = objFila.insertCell();
 			celdaNivel.innerHTML = preguntas[i].nivel;
 			let celdaPregunta = objFila.insertCell();
