@@ -1,5 +1,4 @@
 class sistema {
-
 	constructor() {
 		this.listaTemas = [];
 		this.listaPreguntas = [];
@@ -7,15 +6,15 @@ class sistema {
 	}
 
 	hayTemas() {
-		return this.listaTemas.length != 0
+		return this.listaTemas.length != 0;
 	}
 
 	hayPreguntas() {
-		return this.listaPreguntas.length != 0
+		return this.listaPreguntas.length != 0;
 	}
 
 	hayPuntuaciones() {
-		return this.listaPuntuaciones.length != 0
+		return this.listaPuntuaciones.length != 0;
 	}
 
 	agregarTema(useNombre, useDescripcion) {
@@ -23,27 +22,35 @@ class sistema {
 		let repetido = false;
 		let vacio = false;
 
-		if ((useNombre.length == 0) || (useDescripcion.length == 0)) {
+		if (useNombre.length == 0 || useDescripcion.length == 0) {
 			vacio = true;
 		}
 
-		for (let i=0 ; (i<this.listaTemas.length) && (repetido == false) && (vacio == false) ; i++) {
+		for (
+			let i = 0;
+			i < this.listaTemas.length && repetido == false && vacio == false;
+			i++
+		) {
 			if (this.listaTemas[i].nombre == useNombre) {
 				repetido = true;
 			}
 		}
 
 		if (vacio == true) {
-			alert ("¡No se puede añadir el tema! Alguno de los valores ingresados es nulo.");
+			alert(
+				"¡No se puede añadir el tema! Alguno de los valores ingresados es nulo."
+			);
 		} else if (repetido == true) {
-			alert ("¡No se puede añadir el tema! Ya existe un tema con este nombre.");
+			alert(
+				"¡No se puede añadir el tema! Ya existe un tema con este nombre."
+			);
 		} else {
 			let nuevoTema = new tema(useNombre, useDescripcion);
 			this.listaTemas.push(nuevoTema);
 			exito = true;
 		}
 
-		return exito
+		return exito;
 	}
 
 	agregarPregunta(useTexto, useRespuestaC, useRespuestaI, useNivel, useTema) {
@@ -57,48 +64,75 @@ class sistema {
 			valido = false;
 		}
 
-		if ((useTexto.length == 0) || (useRespuestaC.length == 0) || (useRespuestaI.length == 0) || (useNivel.toString().length == 0) || (useTema.length == 0)) {
+		if (
+			useTexto.length == 0 ||
+			useRespuestaC.length == 0 ||
+			useRespuestaI.length == 0 ||
+			useNivel.toString().length == 0 ||
+			useTema.length == 0
+		) {
 			vacio = true;
 		}
 
-		if ((useNivel < 1 ) || (useNivel > 5)) {
+		if (useNivel < 1 || useNivel > 5) {
 			nivel = false;
 		}
 
-		for (let i=0 ; (i<this.listaPreguntas.length) && (repetido == false) && (valido == true) && (vacio == false); i++) {
+		for (
+			let i = 0;
+			i < this.listaPreguntas.length &&
+			repetido == false &&
+			valido == true &&
+			vacio == false;
+			i++
+		) {
 			if (this.listaPreguntas[i].texto == useTexto) {
 				repetido = true;
 			}
 		}
 
-		if(vacio == true) {
-			alert ("¡No se puede añadir la pregunta! No se ha ingresado uno de los datos requeridos.")
-		} else if(repetido == true) {
-			alert ("¡No se puede añadir la pregunta! Ya existe una pregunta con este texto.")
-		} else if(nivel == false) {
-			alert ("¡No se puede añadir la pregunta! El nivel ingresado debe ser entre 1 y 5.")
+		if (vacio == true) {
+			alert(
+				"¡No se puede añadir la pregunta! No se ha ingresado uno de los datos requeridos."
+			);
+		} else if (repetido == true) {
+			alert(
+				"¡No se puede añadir la pregunta! Ya existe una pregunta con este texto."
+			);
+		} else if (nivel == false) {
+			alert(
+				"¡No se puede añadir la pregunta! El nivel ingresado debe ser entre 1 y 5."
+			);
 		} else if (valido == false) {
-			alert ("¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas.")
+			alert(
+				"¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas."
+			);
 		} else {
 			let useRespuestaILista = [];
 			let found = true;
 			while (found == true) {
 				if (useRespuestaI.includes(",")) {
 					let index = useRespuestaI.indexOf(",");
-					let pushRespuesta = useRespuestaI.slice(0,index);
+					let pushRespuesta = useRespuestaI.slice(0, index);
 					useRespuestaILista.push(pushRespuesta);
-					useRespuestaI = useRespuestaI.slice(index+2)
+					useRespuestaI = useRespuestaI.slice(index + 2);
 				} else {
 					useRespuestaILista.push(useRespuestaI);
 					found = false;
 				}
 			}
-			let nuevaPregunta = new pregunta(useTexto, useRespuestaC, useRespuestaILista, useNivel, useTema);
+			let nuevaPregunta = new pregunta(
+				useTexto,
+				useRespuestaC,
+				useRespuestaILista,
+				useNivel,
+				useTema
+			);
 			this.listaPreguntas.push(nuevaPregunta);
 			exito = true;
 		}
 
-		return exito
+		return exito;
 	}
 
 	agregarPuntuacion(usePuntuacion) {
@@ -106,22 +140,30 @@ class sistema {
 	}
 
 	contarPreguntas() {
-		return this.listaPreguntas.length
+		return this.listaPreguntas.length;
 	}
 
-	sortPreguntasTemaCrNivelCr() {}
+	sortPreguntasTemaCrNivelCr() {
+		this.listaPreguntas.sort(function (a, b) {
+			return a.nivel - b.nivel;
+		});
+	}
 
-	sortPreguntasTemaDeNivelCr() {}
+	sortPreguntasTemaDeNivelDcr() {
+		this.listaPreguntas.sort(function (a, b) {
+			return b.nivel - a.nivel;
+		});
+	}
 
 	promedioPuntuaciones() {
 		let promedio = 0;
 
-		for (i=0 ; i<this.listaPuntuaciones.length ; i++) {
+		for (i = 0; i < this.listaPuntuaciones.length; i++) {
 			promedio += parseInt(this.listaPuntuaciones[i]);
 		}
 
 		promedio = promedio / this.listaPuntuaciones.length;
-		return Number.parseFloat(promedio).toFixed(2)
+		return Number.parseFloat(promedio).toFixed(2);
 	}
 
 	listarTemasConPreguntas() {
@@ -133,28 +175,22 @@ class sistema {
 			}
 		}
 
-		return temas
+		return temas;
 	}
-
 }
 
-
 class tema {
-
 	constructor(nombre, descripcion) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
 
 	toString() {
-		return "Nombre: " + this.nombre + " Descripcion: " + this.descripcion
+		return "Nombre: " + this.nombre + " Descripcion: " + this.descripcion;
 	}
-
 }
 
-
 class pregunta {
-
 	constructor(texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema) {
 		this.texto = texto;
 		this.respuestaCorrecta = respuestaCorrecta;
@@ -164,7 +200,17 @@ class pregunta {
 	}
 
 	toString() {
-		return "Texto: " + this.texto + " Respuesta Correcta: " + this.respuestaCorrecta + " Respuestas Incorrectas: " + this.respuestasIncorrectas + " Nivel: " + this.nivel + " Tema: " + this.tema
+		return (
+			"Texto: " +
+			this.texto +
+			" Respuesta Correcta: " +
+			this.respuestaCorrecta +
+			" Respuestas Incorrectas: " +
+			this.respuestasIncorrectas +
+			" Nivel: " +
+			this.nivel +
+			" Tema: " +
+			this.tema
+		);
 	}
-
 }

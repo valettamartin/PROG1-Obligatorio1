@@ -114,15 +114,25 @@ function agregarPregunta() {
 	let newNivel = document.getElementById("pregNivel").value;
 	let newTema = JSON.parse(document.getElementById("pregTema").value);
 
-	let exito = MiSistema.agregarPregunta(newTexto, newRespuestaC, newRespuestaI, newNivel, newTema);
+	let exito = MiSistema.agregarPregunta(
+		newTexto,
+		newRespuestaC,
+		newRespuestaI,
+		newNivel,
+		newTema
+	);
 
 	if (exito == true) {
 		document.getElementById("altaPreg").reset();
+		ordenarTabla();
 		actualizarPreguntas();
+		promedioPregTemas();
 	}
 }
 
 function actualizarPreguntas() {
+	let vaciarTabla = document.getElementById("tablaPreguntasBody");
+	vaciarTabla.innerHTML = "";
 	let preguntas = MiSistema.listaPreguntas;
 	let totalPreg = document.getElementById("totalPreg");
 	totalPreg.innerHTML = "";
@@ -133,7 +143,7 @@ function actualizarPreguntas() {
 		cantPreg++;
 
 		if (MiSistema.hayPreguntas() == true) {
-			let objTablaPreg = document.getElementById("tablaPreguntas");
+			let objTablaPreg = document.getElementById("tablaPreguntasBody");
 			let objFila = objTablaPreg.insertRow();
 			let celdaTema = objFila.insertCell();
 			celdaTema.innerHTML = preguntas[i].tema.nombre;
@@ -153,7 +163,7 @@ function actualizarPreguntas() {
 	totalPreg.appendChild(objtextP);
 }
 
-function agregarPuntuacion() {}
+//FALTA//function agregarPuntuacion() {}
 
 function actualizarPuntuacion() {
 	let puntuacion = MiSistema.listaPuntuaciones;
@@ -172,4 +182,40 @@ function actualizarPuntuacion() {
 	textoPuntaje = "Maximo puntaje obtenido por un jugador: " + maximo;
 	let objtextPuntaje = document.createTextNode(textoPuntaje);
 	maxPuntaje.appendChild(objtextPuntaje);
+}
+
+function ordenarTabla() {
+	if (document.getElementById("creciente").checked) {
+		MiSistema.sortPreguntasTemaCrNivelCr();
+	} else {
+		MiSistema.sortPreguntasTemaDeNivelDcr();
+	}
+}
+
+function promedioPregTemas() {
+	let p = MiSistema.listaPreguntas;
+	let cantTemas = 0;
+	let listaDeTemas = [];
+	let cantPreg = 0;
+	let promedio = 0;
+	let pregPorTema = document.getElementById("pregPorTema");
+	pregPorTema.innerHTML = "";
+	let texto = "";
+
+	if (MiSistema.hayPreguntas() == true) {
+		cantPreg = MiSistema.contarPreguntas();
+		for (let i = 0; i < p.length; i++) {
+			if (!listaDeTemas.includes(p[i].tema)) {
+				cantTemas++;
+				listaDeTemas.push(p[i].tema);
+			}
+		}
+		promedio = cantPreg / cantTemas;
+
+		texto =
+			"Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): " +
+			promedio;
+		let objtextProm = document.createTextNode(texto);
+		pregPorTema.appendChild(objtextProm);
+	}
 }

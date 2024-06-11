@@ -71,7 +71,7 @@
                     <li>Sin datos</li>
                 </ul>
                 <ul id="listaTemas"></ul>
-                <p>Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): sin datos</p>
+                <p id="pregPorTema">Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): sin datos</p>
                 <p>Temas sin preguntas</p>
                 <ul id="listaTemaNoPreg">
                     <li>Sin datos</li>
@@ -109,6 +109,7 @@
                         <label for="decreciente">Orden nombre tema decreciente/nivel creciente</label>
                     </form>
                     <table id="tablaPreguntas">
+                        <thead>
                         <tr>
                             <th>Nombre del tema</th>
                             <th>Nivel</th>
@@ -116,6 +117,10 @@
                             <th>Respuesta correcta</th>
                             <th>Respuestas incorrectas</th>
                         </tr>
+                        </thead>
+                        <tbody id="tablaPreguntasBody">
+
+                        </tbody>
                     </table>
                 </div>
             </article>
