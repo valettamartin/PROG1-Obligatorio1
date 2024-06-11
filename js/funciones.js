@@ -184,9 +184,9 @@ function actualizarPuntuacion() {
 
 function ordenarTabla() {
 	if (document.getElementById("creciente").checked) {
-		MiSistema.sortPreguntasTemaCrNivelCr();
+		MiSistema.sortPreguntasTemaCrec();
 	} else {
-		MiSistema.sortPreguntasTemaDeNivelDcr();
+		MiSistema.sortPreguntasTemaDecr();
 	}
 }
 

@@ -143,10 +143,10 @@ class sistema {
 		return this.listaPreguntas.length;
 	}
 
-	sortPreguntasTemaCrNivelCr() {
+	sortPreguntasTemaCrec() {
 		this.listaPreguntas.sort(function (a, b) {
-			let temaA = a.tema.toString();
-			let temaB = b.tema.toString();
+			let temaA = a.tema.nombre.toString();
+			let temaB = b.tema.nombre.toString();
 			let ret = temaA.localeCompare(temaB);
 			if (ret == 0) {
 				ret = a.nivel - b.nivel;
@@ -155,15 +155,15 @@ class sistema {
 		});
 	}
 
-	sortPreguntasTemaDeNivelDcr() {
+	sortPreguntasTemaDecr() {
 		this.listaPreguntas.sort(function (a, b) {
-			let temaA = a.tema.toString();
-			let temaB = b.tema.toString();
-			let retd = temaA.localeCompare(temaB);
-			if (retd == 0) {
-				retd = b.nivel - a.nivel;
+			let temaA = a.tema.nombre.toString();
+			let temaB = b.tema.nombre.toString();
+			let ret = temaB.localeCompare(temaA);
+			if (ret == 0) {
+				ret = a.nivel - b.nivel;
 			}
-			return retd;
+			return ret;
 		});
 	}
 
