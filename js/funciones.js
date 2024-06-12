@@ -294,10 +294,5 @@ function preguntaAleatoria() {
 				listarPreguntas.push(temaPregunta);
 			}
 		}
-		if (hayNivel == false) {
-			alert(
-				"Error, No hay preguntas del nivel seleccionado para el tema que ha elegido, "
-			);
-		}
 	}
 }
