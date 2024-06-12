@@ -269,19 +269,35 @@ function temaSinPregunta() {
 	return listaTemasSinPregunta;
 }
 
+function eliminarTemaCombo() {
+	let listaTemasSinPregunta = temaSinPregunta();
+	for (t in listaTemasSinPregunta) {
+		MiSistema.eliminarTema(t);
+		actualizarTemas();
+	}
+}
+
 function preguntaAleatoria() {
 	let objCombo = document.getElementById("jugarTema").selectedIndex;
 	let nivel = document.getElementById("jugarNivel").value;
-	let listaTemasSinPregunta = temaSinPregunta();
 	let preguntas = MiSistema.listaPreguntas;
+	let listarPreguntas = [];
+	let hayNivel = false;
 
 	if (listaTemasSinPregunta.includes(objCombo)) {
-		alert("Error, No hay preguntas para el tema seleccionado");
-	} else {
 		for (let j = 0; j < preguntas.length; j++) {
 			temaPregunta = preguntas[i].tema.nombre;
-			if ((objCombo = temaPregunta)) {
+			nivelPregunta = preguntas[i].nivel;
+
+			if (temaPregunta == objCombo && nivelPregunta == nivel) {
+				hayNivel = true;
+				listarPreguntas.push(temaPregunta);
 			}
+		}
+		if (hayNivel == false) {
+			alert(
+				"Error, No hay preguntas del nivel seleccionado para el tema que ha elegido, "
+			);
 		}
 	}
 }
