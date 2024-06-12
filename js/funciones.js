@@ -238,6 +238,7 @@ function temaSinPregunta() {
 	listaTemaSinPregunta.innerHTML = "";
 	let cantTemas = 0;
 	let texto = "";
+	let listaTemasSinPregunta = [];
 
 	if (MiSistema.hayTemas() == true) {
 		for (let i = 0; i < t.length; i++) {
@@ -250,6 +251,7 @@ function temaSinPregunta() {
 
 			if (esta == false) {
 				cantTemas++;
+				listaTemasSinPregunta.push(t[i].nombre);
 				let newLi = document.createElement("li");
 				let newLitext = document.createTextNode(t[i].nombre);
 				newLi.appendChild(newLitext);
@@ -264,6 +266,22 @@ function temaSinPregunta() {
 			document.getElementById("listaTemaNoPreg").appendChild(newLiVacio);
 		}
 	}
+	return listaTemasSinPregunta;
 }
 
-function preguntaAleatoria() {}
+function preguntaAleatoria() {
+	let objCombo = document.getElementById("jugarTema").selectedIndex;
+	let nivel = document.getElementById("jugarNivel").value;
+	let listaTemasSinPregunta = temaSinPregunta();
+	let preguntas = MiSistema.listaPreguntas;
+
+	if (listaTemasSinPregunta.includes(objCombo)) {
+		alert("Error, No hay preguntas para el tema seleccionado");
+	} else {
+		for (let j = 0; j < preguntas.length; j++) {
+			temaPregunta = preguntas[i].tema.nombre;
+			if ((objCombo = temaPregunta)) {
+			}
+		}
+	}
+}
