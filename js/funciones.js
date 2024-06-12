@@ -265,3 +265,5 @@ function temaSinPregunta() {
 		}
 	}
 }
+
+function preguntaAleatoria() {}
