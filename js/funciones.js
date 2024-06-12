@@ -89,6 +89,8 @@ function actualizarTemas() {
 	listaDeTemas.innerHTML = "";
 	let pregs = document.getElementById("pregTema");
 	pregs.innerHTML = "";
+	let jugar = document.getElementById("jugarTema");
+	jugar.innerHTML = "";
 	let totalTemas = document.getElementById("totalTemas");
 	totalTemas.innerHTML = "";
 
@@ -98,6 +100,7 @@ function actualizarTemas() {
 		newOption.setAttribute("value", JSON.stringify(temas[i]));
 		newOption.innerText = temas[i].nombre;
 		document.getElementById("pregTema").appendChild(newOption);
+		document.getElementById("jugarTema").appendChild(newOption);
 
 		if (MiSistema.hayTemas() == true) {
 			document.getElementById("listaTemasVacia").style.display = "none";
