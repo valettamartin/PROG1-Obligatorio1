@@ -233,6 +233,8 @@ function temaSinPregunta() {
 	let t = MiSistema.listaTemas;
 	let listaTemaSinPregunta = document.getElementById("listaTemaNoPreg");
 	listaTemaSinPregunta.innerHTML = "";
+	let cantTemas = 0;
+	let texto = "";
 
 	if (MiSistema.hayTemas() == true) {
 		for (let i = 0; i < t.length; i++) {
@@ -244,12 +246,19 @@ function temaSinPregunta() {
 			}
 
 			if (esta == false) {
+				cantTemas++;
 				let newLi = document.createElement("li");
 				let newLitext = document.createTextNode(t[i].nombre);
 				newLi.appendChild(newLitext);
 				document.getElementById("listaTemaNoPreg").appendChild(newLi);
 			}
 		}
+		if (cantTemas == 0) {
+			let newLiVacio = document.createElement("li");
+			texto = "Sin datos";
+			let newLitextVacio = document.createTextNode(texto);
+			newLiVacio.appendChild(newLitextVacio);
+			document.getElementById("listaTemaNoPreg").appendChild(newLiVacio);
+		}
 	}
-	// Falta agregar que se ponga de nuevo el default si la lista esta vacia
 }
