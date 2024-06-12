@@ -77,6 +77,7 @@ function agregarTema() {
 	if (exito == true) {
 		document.getElementById("altaTemas").reset();
 		actualizarTemas();
+		temaSinPregunta();
 	}
 }
 
@@ -250,4 +251,5 @@ function temaSinPregunta() {
 			}
 		}
 	}
+	// Falta agregar que se ponga de nuevo el default si la lista esta vacia
 }
