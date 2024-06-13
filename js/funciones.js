@@ -78,6 +78,7 @@ function agregarTema() {
 		document.getElementById("altaTemas").reset();
 		actualizarTemas();
 		temaSinPregunta();
+		actualizarTemasSinPreg();
 	}
 }
 
@@ -115,6 +116,19 @@ function actualizarTemas() {
 	texto = "Lista de temas (total de temas: " + cantTemas + ")";
 	let objtext = document.createTextNode(texto);
 	totalTemas.appendChild(objtext);
+}
+
+function actualizarTemasSinPreg() {
+	let temas = MiSistema.listaTemas;
+	let jugar = document.getElementById("jugarTema");
+	jugar.innerHTML = "";
+
+	for (let i = 0; i < temas.length; i++) {
+		let newOption = document.createElement("option");
+		newOption.setAttribute("value", JSON.stringify(temas[i]));
+		newOption.innerText = temas[i].nombre;
+		document.getElementById("jugarTema").appendChild(newOption);
+	}
 }
 
 function agregarPregunta() {
@@ -273,7 +287,7 @@ function eliminarTemaCombo() {
 	let listaTemasSinPregunta = temaSinPregunta();
 	for (t in listaTemasSinPregunta) {
 		MiSistema.eliminarTema(t);
-		actualizarTemas();
+		actualizarTemasSinPreg();
 	}
 }
 
