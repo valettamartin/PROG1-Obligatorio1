@@ -189,10 +189,6 @@ class sistema {
 
 		return temas;
 	}
-
-	eliminarTema(temaAEliminar) {
-		this.listaTemas.splice(temaAEliminar, 1);
-	}
 }
 
 class tema {

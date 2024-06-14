@@ -1,5 +1,6 @@
 window.addEventListener("load", innit);
 let MiSistema = new sistema();
+let preguntasYaHechas = [];
 
 function innit() {
 	//deseaCargarDatos();
@@ -24,6 +25,12 @@ function innit() {
 	document
 		.getElementById("decreciente")
 		.addEventListener("click", actualizarPreguntas);
+	document
+		.getElementById("idJugar")
+		.addEventListener("click", preguntaAleatoria);
+	document
+		.getElementById("irJugar")
+		.addEventListener("click", reiniciarPreguntas);
 }
 
 function deseaCargarDatos() {
@@ -72,7 +79,7 @@ function randomColor() {
 	let hue = Math.floor(Math.random() * (60 - 30 + 1)) + 30;
 	let saturation = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
 	let lightness = Math.floor(Math.random() * (60 - 30 + 1)) + 30;
-	
+
 	let color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 	return color;
 }
@@ -86,12 +93,14 @@ function agregarTema() {
 	while (loop == true) {
 		newColor = randomColor();
 		let seRepite = false;
-		for (i=0 ; i<MiSistema.listaTemas.length ; i++) {
+		for (i = 0; i < MiSistema.listaTemas.length; i++) {
 			if (MiSistema.listaTemas[i].color == newColor) {
 				seRepite = true;
 			}
 		}
-		if (seRepite == false) { loop = false }
+		if (seRepite == false) {
+			loop = false;
+		}
 	}
 
 	let exito = MiSistema.agregarTema(newNombre, newDescripcion, newColor);
@@ -161,7 +170,13 @@ function agregarPregunta() {
 	let newNivel = document.getElementById("pregNivel").value;
 	let newTema = JSON.parse(document.getElementById("pregTema").value);
 
-	let exito = MiSistema.agregarPregunta(newTexto, newRespuestaC, newRespuestaI, newNivel, newTema);
+	let exito = MiSistema.agregarPregunta(
+		newTexto,
+		newRespuestaC,
+		newRespuestaI,
+		newNivel,
+		newTema
+	);
 
 	if (exito == true) {
 		document.getElementById("altaPreg").reset();
@@ -206,7 +221,7 @@ function actualizarPreguntas() {
 			let celdaIncorrecta = objFila.insertCell();
 			celdaIncorrecta.innerHTML = preguntas[i].respuestasIncorrectas;
 			celdaIncorrecta.style.border = "black solid 1px";
-			
+
 			objFila.style.backgroundColor = preguntas[i].tema.color;
 		}
 	}
@@ -313,30 +328,65 @@ function temaSinPregunta() {
 	return listaTemasSinPregunta;
 }
 
-function eliminarTemaCombo() {
-	let listaTemasSinPregunta = temaSinPregunta();
-	for (t in listaTemasSinPregunta) {
-		MiSistema.eliminarTema(t);
-		actualizarTemasSinPreg();
-	}
+function reiniciarPreguntas() {
+	preguntasYaHechas = [];
 }
 
 function preguntaAleatoria() {
-	let objCombo = document.getElementById("jugarTema").selectedIndex;
+	let temaIndex = document.getElementById("jugarTema").selectedIndex;
 	let nivel = document.getElementById("jugarNivel").value;
 	let preguntas = MiSistema.listaPreguntas;
 	let listarPreguntas = [];
 	let hayNivel = false;
+	let listaTemasSinPregunta = temaSinPregunta();
+	let textoPregunta = document.getElementById("idTextoPregunta");
+	textoPregunta.innerHTML = "";
+	let texto = "";
 
-	if (listaTemasSinPregunta.includes(objCombo)) {
-		for (let j = 0; j < preguntas.length; j++) {
-			temaPregunta = preguntas[i].tema.nombre;
-			nivelPregunta = preguntas[i].nivel;
+	if (
+		listaTemasSinPregunta.includes(
+			document.getElementById("jugarTema").options[temaIndex].text
+		)
+	) {
+		texto = "NO HAY PREGUNTA";
+		let objtext = document.createTextNode(texto);
+		textoPregunta.appendChild(objtext);
+		alert(
+			"Error, no hay preguntas disponibles para el tema seleccionado, por favor seleccione otro tema"
+		);
+		return;
+	} else {
+		let temaSeleccionado =
+			document.getElementById("jugarTema").options[temaIndex].text;
 
-			if (temaPregunta == objCombo && nivelPregunta == nivel) {
+		for (let i = 0; i < preguntas.length; i++) {
+			let temaPregunta = preguntas[i].tema.nombre;
+			let nivelPregunta = preguntas[i].nivel;
+
+			if (temaPregunta === temaSeleccionado && nivelPregunta === nivel) {
 				hayNivel = true;
-				listarPreguntas.push(temaPregunta);
+				if (!preguntasYaHechas.includes(preguntas[i].texto)) {
+					listarPreguntas.push(preguntas[i].texto);
+				}
 			}
+		}
+		if (!hayNivel || listarPreguntas.length === 0) {
+			alert(
+				"Error, no hay preguntas para el tema elegido con el nivel seleccionado, por favor cambie de tema o de nivel"
+			);
+			texto = "NO HAY PREGUNTA";
+			let objtext = document.createTextNode(texto);
+			textoPregunta.appendChild(objtext);
+		} else {
+			let preguntaSeleccionada =
+				listarPreguntas[
+					Math.floor(Math.random() * listarPreguntas.length)
+				];
+			preguntasYaHechas.push(preguntaSeleccionada);
+
+			texto = preguntaSeleccionada;
+			let objtext = document.createTextNode(texto);
+			textoPregunta.appendChild(objtext);
 		}
 	}
 }
