@@ -17,7 +17,7 @@ class sistema {
 		return this.listaPuntuaciones.length != 0;
 	}
 
-	agregarTema(useNombre, useDescripcion) {
+	agregarTema(useNombre, useDescripcion, newColor) {
 		let exito = false;
 		let repetido = false;
 		let vacio = false;
@@ -45,7 +45,7 @@ class sistema {
 				"¡No se puede añadir el tema! Ya existe un tema con este nombre."
 			);
 		} else {
-			let nuevoTema = new tema(useNombre, useDescripcion);
+			let nuevoTema = new tema(useNombre, useDescripcion, newColor);
 			this.listaTemas.push(nuevoTema);
 			exito = true;
 		}
@@ -196,9 +196,10 @@ class sistema {
 }
 
 class tema {
-	constructor(nombre, descripcion) {
+	constructor(nombre, descripcion, color) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.color = color;
 	}
 
 	toString() {

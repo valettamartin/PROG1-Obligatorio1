@@ -68,11 +68,33 @@ function divManager(selectedButton) {
 	}
 }
 
+function randomColor() {
+	let hue = Math.floor(Math.random() * (60 - 30 + 1)) + 30;
+	let saturation = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
+	let lightness = Math.floor(Math.random() * (60 - 30 + 1)) + 30;
+	
+	let color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+	return color;
+}
+
 function agregarTema() {
 	let newNombre = document.getElementById("temaNombre").value;
 	let newDescripcion = document.getElementById("temaDesc").value;
 
-	let exito = MiSistema.agregarTema(newNombre, newDescripcion);
+	let newColor;
+	let loop = true;
+	while (loop == true) {
+		newColor = randomColor();
+		let seRepite = false;
+		for (i=0 ; i<MiSistema.listaTemas.length ; i++) {
+			if (MiSistema.listaTemas[i].color == newColor) {
+				seRepite = true;
+			}
+		}
+		if (seRepite == false) { loop = false }
+	}
+
+	let exito = MiSistema.agregarTema(newNombre, newDescripcion, newColor);
 
 	if (exito == true) {
 		document.getElementById("altaTemas").reset();
@@ -100,8 +122,9 @@ function actualizarTemas() {
 		let newOption = document.createElement("option");
 		newOption.setAttribute("value", JSON.stringify(temas[i]));
 		newOption.innerText = temas[i].nombre;
+		let newOption2 = newOption.cloneNode();
 		document.getElementById("pregTema").appendChild(newOption);
-		document.getElementById("jugarTema").appendChild(newOption);
+		document.getElementById("jugarTema").appendChild(newOption2);
 
 		if (MiSistema.hayTemas() == true) {
 			document.getElementById("listaTemasVacia").style.display = "none";
@@ -138,13 +161,7 @@ function agregarPregunta() {
 	let newNivel = document.getElementById("pregNivel").value;
 	let newTema = JSON.parse(document.getElementById("pregTema").value);
 
-	let exito = MiSistema.agregarPregunta(
-		newTexto,
-		newRespuestaC,
-		newRespuestaI,
-		newNivel,
-		newTema
-	);
+	let exito = MiSistema.agregarPregunta(newTexto, newRespuestaC, newRespuestaI, newNivel, newTema);
 
 	if (exito == true) {
 		document.getElementById("altaPreg").reset();
@@ -179,6 +196,7 @@ function actualizarPreguntas() {
 			celdaCorrecta.innerHTML = preguntas[i].respuestaCorrecta;
 			let celdaIncorrecta = objFila.insertCell();
 			celdaIncorrecta.innerHTML = preguntas[i].respuestasIncorrectas;
+			objFila.style.backgroundColor = preguntas[i].tema.color; 
 		}
 	}
 
