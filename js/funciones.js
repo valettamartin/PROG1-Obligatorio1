@@ -186,17 +186,28 @@ function actualizarPreguntas() {
 		if (MiSistema.hayPreguntas() == true) {
 			let objTablaPreg = document.getElementById("tablaPreguntasBody");
 			let objFila = objTablaPreg.insertRow();
+
 			let celdaTema = objFila.insertCell();
 			celdaTema.innerHTML = preguntas[i].tema.nombre;
+			celdaTema.style.border = "black solid 1px";
+
 			let celdaNivel = objFila.insertCell();
 			celdaNivel.innerHTML = preguntas[i].nivel;
+			celdaNivel.style.border = "black solid 1px";
+
 			let celdaPregunta = objFila.insertCell();
 			celdaPregunta.innerHTML = preguntas[i].texto;
+			celdaPregunta.style.border = "black solid 1px";
+
 			let celdaCorrecta = objFila.insertCell();
 			celdaCorrecta.innerHTML = preguntas[i].respuestaCorrecta;
+			celdaCorrecta.style.border = "black solid 1px";
+
 			let celdaIncorrecta = objFila.insertCell();
 			celdaIncorrecta.innerHTML = preguntas[i].respuestasIncorrectas;
-			objFila.style.backgroundColor = preguntas[i].tema.color; 
+			celdaIncorrecta.style.border = "black solid 1px";
+			
+			objFila.style.backgroundColor = preguntas[i].tema.color;
 		}
 	}
 
@@ -254,6 +265,7 @@ function promedioPregTemas() {
 			}
 		}
 		promedio = cantPreg / cantTemas;
+		promedio = promedio.toFixed(2);
 
 		texto =
 			"Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): " +
