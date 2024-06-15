@@ -325,6 +325,11 @@ function preguntaAleatoria() {
 	let textoPregunta = document.getElementById("idTextoPregunta");
 	textoPregunta.innerHTML = "";
 	let texto = "";
+	let resp1 = document.getElementById("respuesta1");
+	let resp2 = document.getElementById("respuesta2");
+	let resp3 = document.getElementById("respuesta3");
+	let resp4 = document.getElementById("respuesta4");
+	let listaBotones = [resp1, resp2, resp3, resp4];
 
 	if (
 		listaTemasSinPregunta.includes(
@@ -334,6 +339,10 @@ function preguntaAleatoria() {
 		texto = "NO HAY PREGUNTA";
 		let objtext = document.createTextNode(texto);
 		textoPregunta.appendChild(objtext);
+		for (let i = 0; i < listaBotones.length; i++) {
+			listaBotones[i].value = "Error";
+			listaBotones[i].innerText = "Error";
+		}
 		alert(
 			"Error, no hay preguntas disponibles para el tema seleccionado, por favor seleccione otro tema"
 		);
@@ -360,6 +369,10 @@ function preguntaAleatoria() {
 			texto = "NO HAY PREGUNTA";
 			let objtext = document.createTextNode(texto);
 			textoPregunta.appendChild(objtext);
+			for (let i = 0; i < listaBotones.length; i++) {
+				listaBotones[i].value = "Error";
+				listaBotones[i].innerText = "Error";
+			}
 		} else {
 			let preguntaSeleccionada =
 				listarPreguntas[
