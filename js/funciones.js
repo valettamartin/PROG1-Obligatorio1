@@ -25,6 +25,7 @@ function innit() {
 	document.getElementById("respuesta2").addEventListener("click", corregir);
 	document.getElementById("respuesta3").addEventListener("click", corregir);
 	document.getElementById("respuesta4").addEventListener("click", corregir);
+	document.getElementById("juegoAyuda").addEventListener("click", juegoAyuda);
 }
 
 function deseaCargarDatos() {
@@ -456,4 +457,19 @@ function actualizarPuntuacion() {
 	textoPuntaje = "Maximo puntaje obtenido por un jugador: " + maximo;
 	let objtextPuntaje = document.createTextNode(textoPuntaje);
 	maxPuntaje.appendChild(objtextPuntaje);
+}
+
+function juegoAyuda() {
+	let preguntaActual = document.getElementById("idTextoPregunta").innerText
+	let loop = true;
+
+	for (i=0 ; (i<MiSistema.listaPreguntas.length) && (loop) ; i++) {
+		if (preguntaActual == MiSistema.listaPreguntas[i].texto) {
+			preguntaActual = MiSistema.listaPreguntas[i].respuestaCorrecta;
+			loop = false;
+		}
+	}
+
+	preguntaActualPrint = preguntaActual.slice(0,1);
+	alert("El primer carácter de la respuesta correcta es: " + preguntaActualPrint);
 }
