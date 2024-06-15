@@ -236,27 +236,6 @@ function actualizarPreguntas() {
 	promedioPregTemas();
 }
 
-//FALTA//function agregarPuntuacion() {}
-
-function actualizarPuntuacion() {
-	let puntuacion = MiSistema.listaPuntuaciones;
-	let maxPuntaje = document.getElementById("maxpuntaje");
-	maxPuntaje.innerHTML = "";
-	let maximo = 0;
-	let textoPuntaje = "";
-
-	for (let i = 0; i < puntuacion.length; i++) {
-		let puntaje = puntuacion[i];
-		if (puntaje > maximo) {
-			maximo = puntaje;
-		}
-	}
-
-	textoPuntaje = "Maximo puntaje obtenido por un jugador: " + maximo;
-	let objtextPuntaje = document.createTextNode(textoPuntaje);
-	maxPuntaje.appendChild(objtextPuntaje);
-}
-
 function ordenarTabla() {
 	if (document.getElementById("creciente").checked) {
 		MiSistema.sortPreguntasTemaCrec();
@@ -431,3 +410,24 @@ function respuestasAleatorias(preguntaElegida) {
 }
 
 function corregir() {}
+
+function agregarPuntuacion() {}
+
+function actualizarPuntuacion() {
+	let puntuacion = MiSistema.listaPuntuaciones;
+	let maxPuntaje = document.getElementById("maxpuntaje");
+	maxPuntaje.innerHTML = "";
+	let maximo = 0;
+	let textoPuntaje = "";
+
+	for (let i = 0; i < puntuacion.length; i++) {
+		let puntaje = puntuacion[i];
+		if (puntaje > maximo) {
+			maximo = puntaje;
+		}
+	}
+
+	textoPuntaje = "Maximo puntaje obtenido por un jugador: " + maximo;
+	let objtextPuntaje = document.createTextNode(textoPuntaje);
+	maxPuntaje.appendChild(objtextPuntaje);
+}
