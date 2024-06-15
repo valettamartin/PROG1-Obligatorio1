@@ -432,8 +432,10 @@ function corregir(event) {
 	let botonSeleccionado = event.target;
 	if (respuestaSeleccionada === respuestaCorrecta) {
 		botonSeleccionado.classList.add("correcto");
+		reproducirSonido("./audios/correcto.mp3");
 	} else {
 		botonSeleccionado.classList.add("incorrecto");
+		reproducirSonido("./audios/incorrecto.mp3");
 	}
 
 	let botones = document.querySelectorAll(".questionGeneralFormat");
@@ -448,6 +450,11 @@ function restaurarBotones() {
 		boton.classList.remove("correcto", "incorrecto");
 		boton.disabled = false;
 	});
+}
+
+function reproducirSonido(src) {
+	let audio = new Audio(src);
+	audio.play();
 }
 
 function agregarPuntuacion() {}
