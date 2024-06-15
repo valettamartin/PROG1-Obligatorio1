@@ -390,3 +390,21 @@ function preguntaAleatoria() {
 		}
 	}
 }
+
+function respuestasAleatorias(preguntaElegida) {
+	let listaRespuestas = [];
+	let preguntas = MiSistema.listaPreguntas;
+	let resp1 = document.getElementById("respuesta1");
+	let resp2 = document.getElementById("respuesta2");
+	let resp3 = document.getElementById("respuesta3");
+	let resp4 = document.getElementById("respuesta4");
+
+	for (let i = 0; i < preguntas.length; i++) {
+		if (preguntas[i].texto == preguntaElegida) {
+			listaRespuestas.push(preguntas[i].respuestaCorrecta);
+			for (let j = 0; j < 3; j++) {
+				listaRespuestas.push(preguntas[i].respuestasIncorrectas[j]);
+			}
+		}
+	}
+}
