@@ -57,12 +57,7 @@ class sistema {
 		let exito = false;
 		let repetido = false;
 		let vacio = false;
-		let valido = true;
 		let nivel = true;
-
-		if (useRespuestaI.includes(useRespuestaC)) {
-			valido = false;
-		}
 
 		if (
 			useTexto.length == 0 ||
@@ -78,14 +73,7 @@ class sistema {
 			nivel = false;
 		}
 
-		for (
-			let i = 0;
-			i < this.listaPreguntas.length &&
-			repetido == false &&
-			valido == true &&
-			vacio == false;
-			i++
-		) {
+		for (let i = 0; i < this.listaPreguntas.length && repetido == false && vacio == false; i++) {
 			if (this.listaPreguntas[i].texto == useTexto) {
 				repetido = true;
 			}
@@ -103,10 +91,6 @@ class sistema {
 			alert(
 				"¡No se puede añadir la pregunta! El nivel ingresado debe ser entre 1 y 5."
 			);
-		} else if (valido == false) {
-			alert(
-				"¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas."
-			);
 		} else {
 			let useRespuestaILista = [];
 			let found = true;
@@ -114,22 +98,29 @@ class sistema {
 				if (useRespuestaI.includes(",")) {
 					let index = useRespuestaI.indexOf(",");
 					let pushRespuesta = useRespuestaI.slice(0, index);
+					pushRespuesta = pushRespuesta.trim();
 					useRespuestaILista.push(pushRespuesta);
-					useRespuestaI = useRespuestaI.slice(index + 2);
+					useRespuestaI = useRespuestaI.slice(index + 1);
 				} else {
+					useRespuestaI = useRespuestaI.trim();
 					useRespuestaILista.push(useRespuestaI);
 					found = false;
 				}
 			}
-			let nuevaPregunta = new pregunta(
-				useTexto,
-				useRespuestaC,
-				useRespuestaILista,
-				useNivel,
-				useTema
-			);
-			this.listaPreguntas.push(nuevaPregunta);
-			exito = true;
+
+			if (useRespuestaILista.includes(useRespuestaC)) {
+				alert ("¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas.")
+			} else {
+				let nuevaPregunta = new pregunta(
+					useTexto,
+					useRespuestaC,
+					useRespuestaILista,
+					useNivel,
+					useTema
+				);
+				this.listaPreguntas.push(nuevaPregunta);
+				exito = true;
+			}
 		}
 
 		return exito;

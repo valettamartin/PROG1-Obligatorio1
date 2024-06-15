@@ -14,27 +14,13 @@ function innit() {
 	admin.addEventListener("click", () => divManager(admin));
 	jugar.addEventListener("click", () => divManager(jugar));
 
-	document
-		.getElementById("agregarTema")
-		.addEventListener("click", agregarTema);
-	document
-		.getElementById("agregarPreg")
-		.addEventListener("click", agregarPregunta);
-	document
-		.getElementById("creciente")
-		.addEventListener("click", actualizarPreguntas);
-	document
-		.getElementById("decreciente")
-		.addEventListener("click", actualizarPreguntas);
-	document
-		.getElementById("idJugar")
-		.addEventListener("click", preguntaAleatoria);
-	document
-		.getElementById("idJugar")
-		.addEventListener("click", restaurarBotones);
-	document
-		.getElementById("irJugar")
-		.addEventListener("click", reiniciarPreguntas);
+	document.getElementById("agregarTema").addEventListener("click", agregarTema);
+	document.getElementById("agregarPreg").addEventListener("click", agregarPregunta);
+	document.getElementById("creciente").addEventListener("click", actualizarPreguntas);
+	document.getElementById("decreciente").addEventListener("click", actualizarPreguntas);
+	document.getElementById("idJugar").addEventListener("click", preguntaAleatoria);
+	document.getElementById("idJugar").addEventListener("click", restaurarBotones);
+	document.getElementById("irJugar").addEventListener("click", reiniciarPreguntas);
 	document.getElementById("respuesta1").addEventListener("click", corregir);
 	document.getElementById("respuesta2").addEventListener("click", corregir);
 	document.getElementById("respuesta3").addEventListener("click", corregir);
@@ -178,13 +164,7 @@ function agregarPregunta() {
 	let newNivel = document.getElementById("pregNivel").value;
 	let newTema = JSON.parse(document.getElementById("pregTema").value);
 
-	let exito = MiSistema.agregarPregunta(
-		newTexto,
-		newRespuestaC,
-		newRespuestaI,
-		newNivel,
-		newTema
-	);
+	let exito = MiSistema.agregarPregunta(newTexto, newRespuestaC, newRespuestaI, newNivel, newTema);
 
 	if (exito == true) {
 		document.getElementById("altaPreg").reset();
