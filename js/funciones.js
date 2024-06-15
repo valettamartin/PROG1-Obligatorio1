@@ -31,6 +31,10 @@ function innit() {
 	document
 		.getElementById("irJugar")
 		.addEventListener("click", reiniciarPreguntas);
+	document.getElementById("respuesta1").addEventListener("click", corregir);
+	document.getElementById("respuesta2").addEventListener("click", corregir);
+	document.getElementById("respuesta3").addEventListener("click", corregir);
+	document.getElementById("respuesta4").addEventListener("click", corregir);
 }
 
 function deseaCargarDatos() {
@@ -425,3 +429,5 @@ function respuestasAleatorias(preguntaElegida) {
 		botones[i].innerText = listaRespuestas[i];
 	}
 }
+
+function corregir() {}
