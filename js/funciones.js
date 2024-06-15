@@ -1,6 +1,7 @@
 window.addEventListener("load", innit);
 let MiSistema = new sistema();
 let preguntasYaHechas = [];
+let respuestaCorrecta = "";
 
 function innit() {
 	//deseaCargarDatos();
@@ -399,7 +400,7 @@ function respuestasAleatorias(preguntaElegida) {
 
 	for (let i = 0; i < preguntas.length; i++) {
 		if (preguntas[i].texto == preguntaElegida) {
-			let respuestaCorrecta = preguntas[i].respuestaCorrecta;
+			respuestaCorrecta = preguntas[i].respuestaCorrecta;
 			listaRespuestas.push(respuestaCorrecta);
 			for (let j = 0; j < 3; j++) {
 				listaRespuestas.push(preguntas[i].respuestasIncorrectas[j]);
