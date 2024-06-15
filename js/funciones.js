@@ -30,6 +30,9 @@ function innit() {
 		.getElementById("idJugar")
 		.addEventListener("click", preguntaAleatoria);
 	document
+		.getElementById("idJugar")
+		.addEventListener("click", restaurarBotones);
+	document
 		.getElementById("irJugar")
 		.addEventListener("click", reiniciarPreguntas);
 	document.getElementById("respuesta1").addEventListener("click", corregir);
@@ -426,9 +429,25 @@ function respuestasAleatorias(preguntaElegida) {
 
 function corregir(event) {
 	let respuestaSeleccionada = event.target.value;
+	let botonSeleccionado = event.target;
 	if (respuestaSeleccionada === respuestaCorrecta) {
+		botonSeleccionado.classList.add("correcto");
 	} else {
+		botonSeleccionado.classList.add("incorrecto");
 	}
+
+	let botones = document.querySelectorAll(".questionGeneralFormat");
+	botones.forEach((boton) => {
+		boton.disabled = true;
+	});
+}
+
+function restaurarBotones() {
+	let botones = document.querySelectorAll(".questionGeneralFormat");
+	botones.forEach((boton) => {
+		boton.classList.remove("correcto", "incorrecto");
+		boton.disabled = false;
+	});
 }
 
 function agregarPuntuacion() {}

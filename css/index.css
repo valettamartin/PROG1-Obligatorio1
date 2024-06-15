@@ -171,6 +171,14 @@ figcaption {
     gap: 20px;
 }
 
+.correcto {
+    background-color: #4CAF50; 
+}
+
+.incorrecto {
+    background-color: #f44336; 
+}
+
 .buttonContainer {
     margin-top: 20px;
     margin-bottom: 15px;
