@@ -387,6 +387,7 @@ function preguntaAleatoria() {
 			texto = preguntaSeleccionada;
 			let objtext = document.createTextNode(texto);
 			textoPregunta.appendChild(objtext);
+			respuestasAleatorias(preguntaSeleccionada);
 		}
 	}
 }
@@ -398,6 +399,7 @@ function respuestasAleatorias(preguntaElegida) {
 	let resp2 = document.getElementById("respuesta2");
 	let resp3 = document.getElementById("respuesta3");
 	let resp4 = document.getElementById("respuesta4");
+	let botones = [resp1, resp2, resp3, resp4];
 
 	for (let i = 0; i < preguntas.length; i++) {
 		if (preguntas[i].texto == preguntaElegida) {
@@ -405,6 +407,21 @@ function respuestasAleatorias(preguntaElegida) {
 			for (let j = 0; j < 3; j++) {
 				listaRespuestas.push(preguntas[i].respuestasIncorrectas[j]);
 			}
+			break;
 		}
+	}
+
+	function reOrdenarLista(lista) {
+		for (let i = lista.length - 1; i > 0; i--) {
+			let j = Math.floor(Math.random() * (i + 1));
+			[lista[i], lista[j]] = [lista[j], lista[i]];
+		}
+	}
+
+	reOrdenarLista(listaRespuestas);
+
+	for (let i = 0; i < botones.length; i++) {
+		botones[i].value = listaRespuestas[i];
+		botones[i].innerText = listaRespuestas[i];
 	}
 }
