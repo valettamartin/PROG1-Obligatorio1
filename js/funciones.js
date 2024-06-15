@@ -399,7 +399,8 @@ function respuestasAleatorias(preguntaElegida) {
 
 	for (let i = 0; i < preguntas.length; i++) {
 		if (preguntas[i].texto == preguntaElegida) {
-			listaRespuestas.push(preguntas[i].respuestaCorrecta);
+			let respuestaCorrecta = preguntas[i].respuestaCorrecta;
+			listaRespuestas.push(respuestaCorrecta);
 			for (let j = 0; j < 3; j++) {
 				listaRespuestas.push(preguntas[i].respuestasIncorrectas[j]);
 			}
@@ -422,7 +423,12 @@ function respuestasAleatorias(preguntaElegida) {
 	}
 }
 
-function corregir() {}
+function corregir(event) {
+	let respuestaSeleccionada = event.target.value;
+	if (respuestaSeleccionada === respuestaCorrecta) {
+	} else {
+	}
+}
 
 function agregarPuntuacion() {}
 
