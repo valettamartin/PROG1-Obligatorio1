@@ -46,6 +46,12 @@ function innit() {
 	document
 		.getElementById("juegoSiguiente")
 		.addEventListener("click", restaurarBotones);
+	document
+		.getElementById("juegoTerminar")
+		.addEventListener("click", terminarJuego);
+
+	let jugarBoton = document.getElementById("idJugar");
+	jugarBoton.disabled = false;
 }
 
 function deseaCargarDatos() {
@@ -72,20 +78,28 @@ function deseaCargarDatos() {
 function cargarDatos() {
 	let temasUnicos = {};
 
-    preguntas.forEach(pregunta => {
-        const tema = pregunta.tema;
-        if (!temasUnicos[tema.nombre]) {
-            MiSistema.agregarTema(tema.nombre, tema.descripcion, randomColor()); 
-            temasUnicos[tema.nombre] = true;
-        }
-    });
+	preguntas.forEach((pregunta) => {
+		const tema = pregunta.tema;
+		if (!temasUnicos[tema.nombre]) {
+			MiSistema.agregarTema(tema.nombre, tema.descripcion, randomColor());
+			temasUnicos[tema.nombre] = true;
+		}
+	});
 
-    preguntas.forEach(pregunta => {
-        let tema = MiSistema.listaTemas.find(t => t.nombre === pregunta.tema.nombre);
-        if (tema) {
-            MiSistema.agregarPregunta(pregunta.texto, pregunta.respuestaCorrecta, pregunta.respuestasIncorrectas.join(", "), pregunta.nivel, tema);
-        }
-    });
+	preguntas.forEach((pregunta) => {
+		let tema = MiSistema.listaTemas.find(
+			(t) => t.nombre === pregunta.tema.nombre
+		);
+		if (tema) {
+			MiSistema.agregarPregunta(
+				pregunta.texto,
+				pregunta.respuestaCorrecta,
+				pregunta.respuestasIncorrectas.join(", "),
+				pregunta.nivel,
+				tema
+			);
+		}
+	});
 
 	actualizarPreguntas();
 	actualizarTemas();
@@ -369,6 +383,8 @@ function reiniciarPreguntas() {
 }
 
 function preguntaAleatoria() {
+	let jugarBoton = document.getElementById("idJugar");
+	jugarBoton.disabled = true;
 	let temaIndex = document.getElementById("jugarTema").selectedIndex;
 	let nivel = document.getElementById("jugarNivel").value;
 	let preguntas = MiSistema.listaPreguntas;
@@ -399,6 +415,7 @@ function preguntaAleatoria() {
 		alert(
 			"Error, no hay preguntas disponibles para el tema seleccionado, por favor seleccione otro tema"
 		);
+		jugarBoton.disabled = false;
 		return;
 	} else {
 		let temaSeleccionado =
@@ -426,6 +443,7 @@ function preguntaAleatoria() {
 				listaBotones[i].value = "Error";
 				listaBotones[i].innerText = "Error";
 			}
+			jugarBoton.disabled = false;
 		} else {
 			let preguntaSeleccionada =
 				listarPreguntas[
@@ -548,4 +566,35 @@ function siguientePregunta() {
 	preguntaAleatoria();
 }
 
-function terminarJuego() {}
+function terminarJuego() {
+	let textoPuntuacion = document.getElementById("puntajeAcumulado").innerText;
+	let puntaje = "";
+	let jugarBoton = document.getElementById("idJugar");
+	let textoPregunta = document.getElementById("idTextoPregunta");
+	textoPregunta.innerHTML = "";
+	let texto = "";
+	let resp1 = document.getElementById("respuesta1");
+	let resp2 = document.getElementById("respuesta2");
+	let resp3 = document.getElementById("respuesta3");
+	let resp4 = document.getElementById("respuesta4");
+	let listaBotones = [resp1, resp2, resp3, resp4];
+
+	for (let i = 0; i < textoPuntuacion.length; i++) {
+		caracter = textoPuntuacion.charAt(i);
+		if (caracter == ":") {
+			puntaje = textoPuntuacion.slice(i + 2);
+		}
+	}
+
+	alert("El puntaje obtenido es: " + puntaje);
+
+	texto = "TEXTO DE LA PREGUNTA";
+	let objtext = document.createTextNode(texto);
+	textoPregunta.appendChild(objtext);
+	for (let i = 0; i < listaBotones.length; i++) {
+		listaBotones[i].value = "Respuesta " + (i + 1);
+		listaBotones[i].innerText = "Respuesta " + (i + 1);
+	}
+	restaurarBotones();
+	jugarBoton.disabled = false;
+}
