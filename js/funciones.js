@@ -14,18 +14,38 @@ function innit() {
 	admin.addEventListener("click", () => divManager(admin));
 	jugar.addEventListener("click", () => divManager(jugar));
 
-	document.getElementById("agregarTema").addEventListener("click", agregarTema);
-	document.getElementById("agregarPreg").addEventListener("click", agregarPregunta);
-	document.getElementById("creciente").addEventListener("click", actualizarPreguntas);
-	document.getElementById("decreciente").addEventListener("click", actualizarPreguntas);
-	document.getElementById("idJugar").addEventListener("click", preguntaAleatoria);
-	document.getElementById("idJugar").addEventListener("click", restaurarBotones);
-	document.getElementById("irJugar").addEventListener("click", reiniciarPreguntas);
+	document
+		.getElementById("agregarTema")
+		.addEventListener("click", agregarTema);
+	document
+		.getElementById("agregarPreg")
+		.addEventListener("click", agregarPregunta);
+	document
+		.getElementById("creciente")
+		.addEventListener("click", actualizarPreguntas);
+	document
+		.getElementById("decreciente")
+		.addEventListener("click", actualizarPreguntas);
+	document
+		.getElementById("idJugar")
+		.addEventListener("click", preguntaAleatoria);
+	document
+		.getElementById("idJugar")
+		.addEventListener("click", restaurarBotones);
+	document
+		.getElementById("irJugar")
+		.addEventListener("click", reiniciarPreguntas);
 	document.getElementById("respuesta1").addEventListener("click", corregir);
 	document.getElementById("respuesta2").addEventListener("click", corregir);
 	document.getElementById("respuesta3").addEventListener("click", corregir);
 	document.getElementById("respuesta4").addEventListener("click", corregir);
 	document.getElementById("juegoAyuda").addEventListener("click", juegoAyuda);
+	document
+		.getElementById("juegoSiguiente")
+		.addEventListener("click", siguientePregunta);
+	document
+		.getElementById("juegoSiguiente")
+		.addEventListener("click", restaurarBotones);
 }
 
 function deseaCargarDatos() {
@@ -165,7 +185,13 @@ function agregarPregunta() {
 	let newNivel = document.getElementById("pregNivel").value;
 	let newTema = JSON.parse(document.getElementById("pregTema").value);
 
-	let exito = MiSistema.agregarPregunta(newTexto, newRespuestaC, newRespuestaI, newNivel, newTema);
+	let exito = MiSistema.agregarPregunta(
+		newTexto,
+		newRespuestaC,
+		newRespuestaI,
+		newNivel,
+		newTema
+	);
 
 	if (exito == true) {
 		document.getElementById("altaPreg").reset();
@@ -222,10 +248,13 @@ function actualizarPreguntas() {
 		}
 
 		let altura = objFila.offsetHeight;
-		let index = objTabla.style.paddingBottom.indexOf("p")
+		let index = objTabla.style.paddingBottom.indexOf("p");
 
-		if (objTabla.style.paddingBottom.slice(0,index) - (altura + 4) > 0) {
-			objTabla.style.paddingBottom = objTabla.style.paddingBottom.slice(0,index) - (altura + 4) + "px";
+		if (objTabla.style.paddingBottom.slice(0, index) - (altura + 4) > 0) {
+			objTabla.style.paddingBottom =
+				objTabla.style.paddingBottom.slice(0, index) -
+				(altura + 4) +
+				"px";
 		} else {
 			objTabla.style.paddingBottom = "0px";
 		}
@@ -476,16 +505,24 @@ function actualizarPuntuacion() {
 }
 
 function juegoAyuda() {
-	let preguntaActual = document.getElementById("idTextoPregunta").innerText
+	let preguntaActual = document.getElementById("idTextoPregunta").innerText;
 	let loop = true;
 
-	for (i=0 ; (i<MiSistema.listaPreguntas.length) && (loop) ; i++) {
+	for (i = 0; i < MiSistema.listaPreguntas.length && loop; i++) {
 		if (preguntaActual == MiSistema.listaPreguntas[i].texto) {
 			preguntaActual = MiSistema.listaPreguntas[i].respuestaCorrecta;
 			loop = false;
 		}
 	}
 
-	preguntaActualPrint = preguntaActual.slice(0,1);
-	alert("El primer carácter de la respuesta correcta es: " + preguntaActualPrint);
+	preguntaActualPrint = preguntaActual.slice(0, 1);
+	alert(
+		"El primer carácter de la respuesta correcta es: " + preguntaActualPrint
+	);
 }
+
+function siguientePregunta() {
+	preguntaAleatoria();
+}
+
+function terminarJuego() {}
