@@ -131,12 +131,26 @@ figcaption {
     width: 100%;
     margin-top: 15px;
     border: black solid 2px;
-    padding-bottom: 75px;
+    max-height: 200px;
+    display: block;
+    overflow-y: auto;
+    padding-bottom: 170px;
 }
 
 .tableContainer th {
     border: black solid 1px;
     background-color: #f2f2f2;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+}
+
+.tableContainer thead, .tableContainer tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 .noMarginBottom {

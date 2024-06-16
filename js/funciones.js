@@ -184,34 +184,50 @@ function actualizarPreguntas() {
 	let cantPreg = 0;
 	let textoP = "";
 
+	let objTablaPreg = document.getElementById("tablaPreguntasBody");
+	let objTabla = document.getElementById("tablaPreguntas");
+
+	objTabla.style.paddingBottom = "170px";
+
 	for (let i = 0; i < preguntas.length; i++) {
 		cantPreg++;
 
 		if (MiSistema.hayPreguntas() == true) {
-			let objTablaPreg = document.getElementById("tablaPreguntasBody");
-			let objFila = objTablaPreg.insertRow();
+			var objFila = objTablaPreg.insertRow();
 
 			let celdaTema = objFila.insertCell();
 			celdaTema.innerHTML = preguntas[i].tema.nombre;
 			celdaTema.style.border = "black solid 1px";
+			celdaTema.style.backgroundColor = preguntas[i].tema.color;
 
 			let celdaNivel = objFila.insertCell();
 			celdaNivel.innerHTML = preguntas[i].nivel;
 			celdaNivel.style.border = "black solid 1px";
+			celdaNivel.style.backgroundColor = preguntas[i].tema.color;
 
 			let celdaPregunta = objFila.insertCell();
 			celdaPregunta.innerHTML = preguntas[i].texto;
 			celdaPregunta.style.border = "black solid 1px";
+			celdaPregunta.style.backgroundColor = preguntas[i].tema.color;
 
 			let celdaCorrecta = objFila.insertCell();
 			celdaCorrecta.innerHTML = preguntas[i].respuestaCorrecta;
 			celdaCorrecta.style.border = "black solid 1px";
+			celdaCorrecta.style.backgroundColor = preguntas[i].tema.color;
 
 			let celdaIncorrecta = objFila.insertCell();
 			celdaIncorrecta.innerHTML = preguntas[i].respuestasIncorrectas;
 			celdaIncorrecta.style.border = "black solid 1px";
+			celdaIncorrecta.style.backgroundColor = preguntas[i].tema.color;
+		}
 
-			objFila.style.backgroundColor = preguntas[i].tema.color;
+		let altura = objFila.offsetHeight;
+		let index = objTabla.style.paddingBottom.indexOf("p")
+
+		if (objTabla.style.paddingBottom.slice(0,index) - (altura + 4) > 0) {
+			objTabla.style.paddingBottom = objTabla.style.paddingBottom.slice(0,index) - (altura + 4) + "px";
+		} else {
+			objTabla.style.paddingBottom = "0px";
 		}
 	}
 
