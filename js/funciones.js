@@ -4,7 +4,7 @@ let preguntasYaHechas = [];
 let respuestaCorrecta = "";
 
 function innit() {
-	//deseaCargarDatos();
+	deseaCargarDatos();
 
 	let info = document.getElementById("irInfo");
 	let admin = document.getElementById("irAdmin");
@@ -63,9 +63,32 @@ function deseaCargarDatos() {
 		} else {
 			loop = false;
 			if (loadYesOrNo == "s") {
+				cargarDatos();
 			}
 		}
 	}
+}
+
+function cargarDatos() {
+	let temasUnicos = {};
+
+    preguntas.forEach(pregunta => {
+        const tema = pregunta.tema;
+        if (!temasUnicos[tema.nombre]) {
+            MiSistema.agregarTema(tema.nombre, tema.descripcion, randomColor()); 
+            temasUnicos[tema.nombre] = true;
+        }
+    });
+
+    preguntas.forEach(pregunta => {
+        let tema = MiSistema.listaTemas.find(t => t.nombre === pregunta.tema.nombre);
+        if (tema) {
+            MiSistema.agregarPregunta(pregunta.texto, pregunta.respuestaCorrecta, pregunta.respuestasIncorrectas.join(", "), pregunta.nivel, tema);
+        }
+    });
+
+	actualizarPreguntas();
+	actualizarTemas();
 }
 
 function divManager(selectedButton) {
