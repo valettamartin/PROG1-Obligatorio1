@@ -39,9 +39,6 @@ function innit() {
 		.getElementById("idJugar")
 		.addEventListener("click", preguntaAleatoria);
 	document
-		.getElementById("idJugar")
-		.addEventListener("click", restaurarBotones);
-	document
 		.getElementById("irJugar")
 		.addEventListener("click", reiniciarPreguntas);
 	document.getElementById("respuesta1").addEventListener("click", corregir);
@@ -52,9 +49,6 @@ function innit() {
 	document
 		.getElementById("juegoSiguiente")
 		.addEventListener("click", siguientePregunta);
-	document
-		.getElementById("juegoSiguiente")
-		.addEventListener("click", restaurarBotones);
 	document
 		.getElementById("juegoTerminar")
 		.addEventListener("click", terminarJuego);
@@ -86,30 +80,72 @@ function deseaCargarDatos() {
 }
 
 function cargarDatos() {
-	let temasUnicos = {};
+	let loop = true;
+	let esta = false;
 
-	preguntas.forEach((pregunta) => {
-		const tema = pregunta.tema;
-		if (!temasUnicos[tema.nombre]) {
-			MiSistema.agregarTema(tema.nombre, tema.descripcion, randomColor());
-			temasUnicos[tema.nombre] = true;
-		}
-	});
+	let temaNombre = "";
+	let temaDesc = "";
+	let temaColor = "";
+	let colorLoop = true;
 
-	preguntas.forEach((pregunta) => {
-		let tema = MiSistema.listaTemas.find(
-			(t) => t.nombre === pregunta.tema.nombre
-		);
-		if (tema) {
-			MiSistema.agregarPregunta(
-				pregunta.texto,
-				pregunta.respuestaCorrecta,
-				pregunta.respuestasIncorrectas.join(", "),
-				pregunta.nivel,
-				tema
-			);
+	let preguntaTexto = "";
+	let preguntaNivel = 0;
+	let preguntaCorr = "";
+	let preguntaIncorr = [];
+	let preguntaTema;
+
+	for(i=0 ; i<datosPrueba.length ; i++) {
+		loop = true;
+		esta = false;
+
+		for (j=0 ; ((j<MiSistema.listaTemas.length) && (loop)) ; j++) {
+			if (MiSistema.listaTemas[j].nombre == datosPrueba[i].tema.nombre) {
+				esta = true;
+				loop = false;
+			}
 		}
-	});
+		if (esta == false) {
+			temaNombre = datosPrueba[i].tema.nombre;
+			temaDesc = datosPrueba[i].tema.descripcion;
+			colorLoop = true;
+			while (colorLoop == true) {
+				temaColor = randomColor();
+				let seRepite = false;
+				for (i = 0; i < MiSistema.listaTemas.length; i++) {
+					if (MiSistema.listaTemas[i].color == temaColor) {
+						seRepite = true;
+					}
+				}
+				if (seRepite == false) {
+					colorLoop = false;
+				}
+			}
+			MiSistema.agregarTema(temaNombre, temaDesc, temaColor);
+		}
+
+		esta = false;
+		loop = true;
+		for (j=0 ; ((j<MiSistema.listaPreguntas.length) && (loop)) ; j++) {
+			if (MiSistema.listaPreguntas[j].texto == datosPrueba[i].texto) {
+				esta = true;
+				loop = false;
+			}
+		}
+		if (esta == false) {
+			loop = true;
+			for (j=0 ; ((j<MiSistema.listaTemas.length) && (loop)) ; j++) {
+				if (datosPrueba[i].tema.nombre == MiSistema.listaTemas[j].nombre) {
+					preguntaTema = MiSistema.listaTemas[j];
+					loop = false;
+				}
+			}
+			preguntaTexto = datosPrueba[i].texto;
+			preguntaNivel = datosPrueba[i].nivel;
+			preguntaCorr = datosPrueba[i].respuestaCorrecta;
+			preguntaIncorr = datosPrueba[i].respuestasIncorrectas.toString();
+			MiSistema.agregarPregunta(preguntaTexto, preguntaCorr, preguntaIncorr, preguntaNivel, preguntaTema);
+		}
+	}
 
 	actualizarPreguntas();
 	actualizarTemas();
@@ -194,6 +230,7 @@ function actualizarTemas() {
 		newOption.setAttribute("value", JSON.stringify(temas[i]));
 		newOption.innerText = temas[i].nombre;
 		let newOption2 = newOption.cloneNode();
+		newOption2.innerText = temas[i].nombre;
 		document.getElementById("pregTema").appendChild(newOption);
 		document.getElementById("jugarTema").appendChild(newOption2);
 
@@ -251,7 +288,7 @@ function actualizarPreguntas() {
 	ordenarTabla();
 	let vaciarTabla = document.getElementById("tablaPreguntasBody");
 	vaciarTabla.innerHTML = "";
-	let preguntas = MiSistema.listaPreguntas;
+	let preguntasUse = MiSistema.listaPreguntas;
 	let totalPreg = document.getElementById("totalPreg");
 	totalPreg.innerHTML = "";
 	let cantPreg = 0;
@@ -262,36 +299,36 @@ function actualizarPreguntas() {
 
 	objTabla.style.paddingBottom = "170px";
 
-	for (let i = 0; i < preguntas.length; i++) {
+	for (let i = 0; i < preguntasUse.length; i++) {
 		cantPreg++;
 
 		if (MiSistema.hayPreguntas() == true) {
 			var objFila = objTablaPreg.insertRow();
 
 			let celdaTema = objFila.insertCell();
-			celdaTema.innerHTML = preguntas[i].tema.nombre;
+			celdaTema.innerHTML = preguntasUse[i].tema.nombre;
 			celdaTema.style.border = "black solid 1px";
-			celdaTema.style.backgroundColor = preguntas[i].tema.color;
+			celdaTema.style.backgroundColor = preguntasUse[i].tema.color;
 
 			let celdaNivel = objFila.insertCell();
-			celdaNivel.innerHTML = preguntas[i].nivel;
+			celdaNivel.innerHTML = preguntasUse[i].nivel;
 			celdaNivel.style.border = "black solid 1px";
-			celdaNivel.style.backgroundColor = preguntas[i].tema.color;
+			celdaNivel.style.backgroundColor = preguntasUse[i].tema.color;
 
 			let celdaPregunta = objFila.insertCell();
-			celdaPregunta.innerHTML = preguntas[i].texto;
+			celdaPregunta.innerHTML = preguntasUse[i].texto;
 			celdaPregunta.style.border = "black solid 1px";
-			celdaPregunta.style.backgroundColor = preguntas[i].tema.color;
+			celdaPregunta.style.backgroundColor = preguntasUse[i].tema.color;
 
 			let celdaCorrecta = objFila.insertCell();
-			celdaCorrecta.innerHTML = preguntas[i].respuestaCorrecta;
+			celdaCorrecta.innerHTML = preguntasUse[i].respuestaCorrecta;
 			celdaCorrecta.style.border = "black solid 1px";
-			celdaCorrecta.style.backgroundColor = preguntas[i].tema.color;
+			celdaCorrecta.style.backgroundColor = preguntasUse[i].tema.color;
 
 			let celdaIncorrecta = objFila.insertCell();
-			celdaIncorrecta.innerHTML = preguntas[i].respuestasIncorrectas;
+			celdaIncorrecta.innerHTML = preguntasUse[i].respuestasIncorrectas;
 			celdaIncorrecta.style.border = "black solid 1px";
-			celdaIncorrecta.style.backgroundColor = preguntas[i].tema.color;
+			celdaIncorrecta.style.backgroundColor = preguntasUse[i].tema.color;
 		}
 
 		let altura = objFila.offsetHeight;
@@ -412,7 +449,7 @@ function preguntaAleatoria() {
 	jugarBoton.disabled = true;
 	let temaIndex = document.getElementById("jugarTema").selectedIndex;
 	let nivel = document.getElementById("jugarNivel").value;
-	let preguntas = MiSistema.listaPreguntas;
+	let preguntasUse = MiSistema.listaPreguntas;
 	let listarPreguntas = [];
 	let hayNivel = false;
 	let listaTemasSinPregunta = temaSinPregunta();
@@ -425,11 +462,7 @@ function preguntaAleatoria() {
 	let resp4 = document.getElementById("respuesta4");
 	let listaBotones = [resp1, resp2, resp3, resp4];
 
-	if (
-		listaTemasSinPregunta.includes(
-			document.getElementById("jugarTema").options[temaIndex].text
-		)
-	) {
+	if (listaTemasSinPregunta.includes(document.getElementById("jugarTema").options[temaIndex].text)) {
 		texto = "NO HAY PREGUNTA";
 		let objtext = document.createTextNode(texto);
 		textoPregunta.appendChild(objtext);
@@ -437,27 +470,32 @@ function preguntaAleatoria() {
 			listaBotones[i].value = "Error";
 			listaBotones[i].innerText = "Error";
 		}
-		alert(
-			"Error, no hay preguntas disponibles para el tema seleccionado, por favor seleccione otro tema"
-		);
+		alert("Error, no hay preguntas disponibles para el tema seleccionado, por favor seleccione otro tema");
 		jugarBoton.disabled = false;
 		juegoEnProgreso = false;
 		return;
 	} else {
-		let temaSeleccionado =
-			document.getElementById("jugarTema").options[temaIndex].text;
+		let temaSeleccionado = document.getElementById("jugarTema").options[temaIndex].text;
+		let temaColor = JSON.parse(document.getElementById("jugarTema").options[temaIndex].value);
+		temaColor = temaColor.color;
+		for (i = 0 ;  i<listaBotones.length ; i++) {
+			listaBotones[i].style.backgroundColor = temaColor;
+		}
 
-		for (let i = 0; i < preguntas.length; i++) {
-			let temaPregunta = preguntas[i].tema.nombre;
-			let nivelPregunta = preguntas[i].nivel;
+		textoPregunta.style.backgroundColor = temaColor;
 
-			if (temaPregunta === temaSeleccionado && nivelPregunta === nivel) {
+		for (let i = 0; i < preguntasUse.length; i++) {
+			let temaPregunta = preguntasUse[i].tema.nombre;
+			let nivelPregunta = preguntasUse[i].nivel;
+
+			if (temaPregunta == temaSeleccionado && nivelPregunta == nivel) {
 				hayNivel = true;
-				if (!preguntasYaHechas.includes(preguntas[i].texto)) {
-					listarPreguntas.push(preguntas[i].texto);
+				if (!preguntasYaHechas.includes(preguntasUse[i].texto)) {
+					listarPreguntas.push(preguntasUse[i].texto);
 				}
 			}
 		}
+		if (!hayNivel) {
 		if (!hayNivel) {
 			alert(
 				"Error, no hay preguntas para el tema elegido con el nivel seleccionado, por favor cambie de tema o de nivel"
@@ -491,19 +529,19 @@ function preguntaAleatoria() {
 
 function respuestasAleatorias(preguntaElegida) {
 	let listaRespuestas = [];
-	let preguntas = MiSistema.listaPreguntas;
+	let preguntasUse = MiSistema.listaPreguntas;
 	let resp1 = document.getElementById("respuesta1");
 	let resp2 = document.getElementById("respuesta2");
 	let resp3 = document.getElementById("respuesta3");
 	let resp4 = document.getElementById("respuesta4");
 	let botones = [resp1, resp2, resp3, resp4];
 
-	for (let i = 0; i < preguntas.length; i++) {
-		if (preguntas[i].texto == preguntaElegida) {
-			respuestaCorrecta = preguntas[i].respuestaCorrecta;
+	for (let i = 0; i < preguntasUse.length; i++) {
+		if (preguntasUse[i].texto == preguntaElegida) {
+			respuestaCorrecta = preguntasUse[i].respuestaCorrecta;
 			listaRespuestas.push(respuestaCorrecta);
 			for (let j = 0; j < 3; j++) {
-				listaRespuestas.push(preguntas[i].respuestasIncorrectas[j]);
+				listaRespuestas.push(preguntasUse[i].respuestasIncorrectas[j]);
 			}
 			break;
 		}
@@ -528,11 +566,11 @@ function corregir(event) {
 	let respuestaSeleccionada = event.target.value;
 	let botonSeleccionado = event.target;
 	if (respuestaSeleccionada === respuestaCorrecta) {
-		botonSeleccionado.classList.add("correcto");
+		botonSeleccionado.style.backgroundColor = "green";
 		reproducirSonido("./audios/correcto.mp3");
 		puntuacionActual += 10;
 	} else {
-		botonSeleccionado.classList.add("incorrecto");
+		botonSeleccionado.style.backgroundColor = "red";
 		reproducirSonido("./audios/incorrecto.mp3");
 		puntuacionActual -= 1;
 	}
@@ -548,7 +586,7 @@ function corregir(event) {
 function restaurarBotones() {
 	let botones = document.querySelectorAll(".questionGeneralFormat");
 	botones.forEach((boton) => {
-		boton.classList.remove("correcto", "incorrecto");
+		boton.style.backgroundColor = "#e87c24";
 		boton.disabled = false;
 	});
 }
