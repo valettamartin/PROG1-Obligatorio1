@@ -4,6 +4,7 @@ let preguntasYaHechas = [];
 let respuestaCorrecta = "";
 let juegoEnProgreso = false;
 let puntuacionActual = 0;
+let datosPrueba = preguntas;
 
 function innit() {
 	deseaCargarDatos();
@@ -489,16 +490,13 @@ function preguntaAleatoria() {
 		juegoEnProgreso = false;
 		return;
 	} else {
-		let temaSeleccionado =
-			document.getElementById("jugarTema").options[temaIndex].text;
-		let temaColor = JSON.parse(
-			document.getElementById("jugarTema").options[temaIndex].value
-		);
+		let temaSeleccionado = document.getElementById("jugarTema").options[temaIndex].text;
+
+		let temaColor = JSON.parse(document.getElementById("jugarTema").options[temaIndex].value);
 		temaColor = temaColor.color;
 		for (i = 0; i < listaBotones.length; i++) {
 			listaBotones[i].style.backgroundColor = temaColor;
 		}
-
 		textoPregunta.style.backgroundColor = temaColor;
 
 		for (let i = 0; i < preguntasUse.length; i++) {
@@ -514,9 +512,7 @@ function preguntaAleatoria() {
 		}
 		if (!hayNivel) {
 			if (!hayNivel) {
-				alert(
-					"Error, no hay preguntas para el tema elegido con el nivel seleccionado, por favor cambie de tema o de nivel"
-				);
+				alert("Error, no hay preguntas para el tema elegido con el nivel seleccionado, por favor cambie de tema o de nivel");
 				texto = "NO HAY PREGUNTA";
 				let objtext = document.createTextNode(texto);
 				textoPregunta.appendChild(objtext);
@@ -532,7 +528,6 @@ function preguntaAleatoria() {
 						Math.floor(Math.random() * listarPreguntas.length)
 					];
 				preguntasYaHechas.push(preguntaSeleccionada);
-
 				texto = preguntaSeleccionada;
 				let objtext = document.createTextNode(texto);
 				textoPregunta.appendChild(objtext);
