@@ -2,16 +2,25 @@ window.addEventListener("load", innit);
 let MiSistema = new sistema();
 let preguntasYaHechas = [];
 let respuestaCorrecta = "";
+let juegoEnProgreso = false;
+let puntuacionActual = 0;
 
 function innit() {
 	deseaCargarDatos();
+	puntuacionMaxima();
 
 	let info = document.getElementById("irInfo");
 	let admin = document.getElementById("irAdmin");
 	let jugar = document.getElementById("irJugar");
 
-	info.addEventListener("click", () => divManager(info));
-	admin.addEventListener("click", () => divManager(admin));
+	info.addEventListener("click", () => {
+		divManager(info);
+		verificarJuegoEnProgreso();
+	});
+	admin.addEventListener("click", () => {
+		divManager(admin);
+		verificarJuegoEnProgreso();
+	});
 	jugar.addEventListener("click", () => divManager(jugar));
 
 	document
@@ -52,6 +61,7 @@ function innit() {
 
 	let jugarBoton = document.getElementById("idJugar");
 	jugarBoton.disabled = false;
+	document.addEventListener("visibilitychange", handleVisibilityChange);
 }
 
 function deseaCargarDatos() {
@@ -382,7 +392,22 @@ function reiniciarPreguntas() {
 	preguntasYaHechas = [];
 }
 
+function handleVisibilityChange() {
+	if (document.hidden) {
+		if (juegoEnProgreso) {
+			terminarJuego();
+		}
+	}
+}
+
+function verificarJuegoEnProgreso() {
+	if (juegoEnProgreso) {
+		terminarJuego();
+	}
+}
+
 function preguntaAleatoria() {
+	juegoEnProgreso = true;
 	let jugarBoton = document.getElementById("idJugar");
 	jugarBoton.disabled = true;
 	let temaIndex = document.getElementById("jugarTema").selectedIndex;
@@ -416,6 +441,7 @@ function preguntaAleatoria() {
 			"Error, no hay preguntas disponibles para el tema seleccionado, por favor seleccione otro tema"
 		);
 		jugarBoton.disabled = false;
+		juegoEnProgreso = false;
 		return;
 	} else {
 		let temaSeleccionado =
@@ -432,7 +458,7 @@ function preguntaAleatoria() {
 				}
 			}
 		}
-		if (!hayNivel || listarPreguntas.length === 0) {
+		if (!hayNivel) {
 			alert(
 				"Error, no hay preguntas para el tema elegido con el nivel seleccionado, por favor cambie de tema o de nivel"
 			);
@@ -444,6 +470,7 @@ function preguntaAleatoria() {
 				listaBotones[i].innerText = "Error";
 			}
 			jugarBoton.disabled = false;
+			juegoEnProgreso = false;
 		} else {
 			let preguntaSeleccionada =
 				listarPreguntas[
@@ -455,6 +482,9 @@ function preguntaAleatoria() {
 			let objtext = document.createTextNode(texto);
 			textoPregunta.appendChild(objtext);
 			respuestasAleatorias(preguntaSeleccionada);
+			if (listarPreguntas.length == 0) {
+				terminarJuego();
+			}
 		}
 	}
 }
@@ -500,15 +530,19 @@ function corregir(event) {
 	if (respuestaSeleccionada === respuestaCorrecta) {
 		botonSeleccionado.classList.add("correcto");
 		reproducirSonido("./audios/correcto.mp3");
+		puntuacionActual += 10;
 	} else {
 		botonSeleccionado.classList.add("incorrecto");
 		reproducirSonido("./audios/incorrecto.mp3");
+		puntuacionActual -= 1;
 	}
 
 	let botones = document.querySelectorAll(".questionGeneralFormat");
 	botones.forEach((boton) => {
 		boton.disabled = true;
 	});
+
+	actualizarPuntuacion();
 }
 
 function restaurarBotones() {
@@ -524,9 +558,13 @@ function reproducirSonido(src) {
 	audio.play();
 }
 
-function agregarPuntuacion() {}
-
 function actualizarPuntuacion() {
+	let puntaje = document.getElementById("puntajeAcumulado");
+	puntaje.innerText =
+		"Puntaje acumulado en esta partida: " + puntuacionActual;
+}
+
+function puntuacionMaxima() {
 	let puntuacion = MiSistema.listaPuntuaciones;
 	let maxPuntaje = document.getElementById("maxpuntaje");
 	maxPuntaje.innerHTML = "";
@@ -567,8 +605,7 @@ function siguientePregunta() {
 }
 
 function terminarJuego() {
-	let textoPuntuacion = document.getElementById("puntajeAcumulado").innerText;
-	let puntaje = "";
+	alert("El puntaje obtenido es: " + puntuacionActual);
 	let jugarBoton = document.getElementById("idJugar");
 	let textoPregunta = document.getElementById("idTextoPregunta");
 	textoPregunta.innerHTML = "";
@@ -579,14 +616,9 @@ function terminarJuego() {
 	let resp4 = document.getElementById("respuesta4");
 	let listaBotones = [resp1, resp2, resp3, resp4];
 
-	for (let i = 0; i < textoPuntuacion.length; i++) {
-		caracter = textoPuntuacion.charAt(i);
-		if (caracter == ":") {
-			puntaje = textoPuntuacion.slice(i + 2);
-		}
-	}
-
-	alert("El puntaje obtenido es: " + puntaje);
+	MiSistema.agregarPuntuacion(puntuacionActual);
+	puntuacionActual = 0;
+	actualizarPuntuacion();
 
 	texto = "TEXTO DE LA PREGUNTA";
 	let objtext = document.createTextNode(texto);
@@ -597,4 +629,7 @@ function terminarJuego() {
 	}
 	restaurarBotones();
 	jugarBoton.disabled = false;
+
+	puntuacionMaxima();
+	juegoEnProgreso = false;
 }

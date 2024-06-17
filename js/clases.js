@@ -73,7 +73,13 @@ class sistema {
 			nivel = false;
 		}
 
-		for (let i = 0; i < this.listaPreguntas.length && repetido == false && vacio == false; i++) {
+		for (
+			let i = 0;
+			i < this.listaPreguntas.length &&
+			repetido == false &&
+			vacio == false;
+			i++
+		) {
 			if (this.listaPreguntas[i].texto == useTexto) {
 				repetido = true;
 			}
@@ -109,7 +115,9 @@ class sistema {
 			}
 
 			if (useRespuestaILista.includes(useRespuestaC)) {
-				alert ("¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas.")
+				alert(
+					"¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas."
+				);
 			} else {
 				let nuevaPregunta = new pregunta(
 					useTexto,
