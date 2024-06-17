@@ -471,6 +471,8 @@ function preguntaAleatoria() {
 	let resp4 = document.getElementById("respuesta4");
 	let listaBotones = [resp1, resp2, resp3, resp4];
 
+	restaurarBotones();
+
 	if (
 		listaTemasSinPregunta.includes(
 			document.getElementById("jugarTema").options[temaIndex].text
@@ -490,9 +492,12 @@ function preguntaAleatoria() {
 		juegoEnProgreso = false;
 		return;
 	} else {
-		let temaSeleccionado = document.getElementById("jugarTema").options[temaIndex].text;
+		let temaSeleccionado =
+			document.getElementById("jugarTema").options[temaIndex].text;
 
-		let temaColor = JSON.parse(document.getElementById("jugarTema").options[temaIndex].value);
+		let temaColor = JSON.parse(
+			document.getElementById("jugarTema").options[temaIndex].value
+		);
 		temaColor = temaColor.color;
 		for (i = 0; i < listaBotones.length; i++) {
 			listaBotones[i].style.backgroundColor = temaColor;
@@ -511,30 +516,30 @@ function preguntaAleatoria() {
 			}
 		}
 		if (!hayNivel) {
-			if (!hayNivel) {
-				alert("Error, no hay preguntas para el tema elegido con el nivel seleccionado, por favor cambie de tema o de nivel");
-				texto = "NO HAY PREGUNTA";
-				let objtext = document.createTextNode(texto);
-				textoPregunta.appendChild(objtext);
-				for (let i = 0; i < listaBotones.length; i++) {
-					listaBotones[i].value = "Error";
-					listaBotones[i].innerText = "Error";
-				}
-				jugarBoton.disabled = false;
-				juegoEnProgreso = false;
-			} else {
-				let preguntaSeleccionada =
-					listarPreguntas[
-						Math.floor(Math.random() * listarPreguntas.length)
-					];
-				preguntasYaHechas.push(preguntaSeleccionada);
-				texto = preguntaSeleccionada;
-				let objtext = document.createTextNode(texto);
-				textoPregunta.appendChild(objtext);
-				respuestasAleatorias(preguntaSeleccionada);
-				if (listarPreguntas.length == 0) {
-					terminarJuego();
-				}
+			alert(
+				"Error, no hay preguntas para el tema elegido con el nivel seleccionado, por favor cambie de tema o de nivel"
+			);
+			texto = "NO HAY PREGUNTA";
+			let objtext = document.createTextNode(texto);
+			textoPregunta.appendChild(objtext);
+			for (let i = 0; i < listaBotones.length; i++) {
+				listaBotones[i].value = "Error";
+				listaBotones[i].innerText = "Error";
+			}
+			jugarBoton.disabled = false;
+			juegoEnProgreso = false;
+		} else {
+			let preguntaSeleccionada =
+				listarPreguntas[
+					Math.floor(Math.random() * listarPreguntas.length)
+				];
+			preguntasYaHechas.push(preguntaSeleccionada);
+			texto = preguntaSeleccionada;
+			let objtext = document.createTextNode(texto);
+			textoPregunta.appendChild(objtext);
+			respuestasAleatorias(preguntaSeleccionada);
+			if (listarPreguntas.length == 0) {
+				terminarJuego();
 			}
 		}
 	}
