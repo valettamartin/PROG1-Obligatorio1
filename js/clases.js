@@ -9,18 +9,23 @@ class sistema {
 		this.listaPuntuaciones = [];
 	}
 
+	// Devuelve true unicamente si existe algun tema ya creado.
 	hayTemas() {
 		return this.listaTemas.length != 0;
 	}
 
+	// Devuelve true unicamente si existe alguna pregunta ya creada.
 	hayPreguntas() {
 		return this.listaPreguntas.length != 0;
 	}
 
+	// Devuelve true unicamente si existe alguna puntuacion ya ingresada.
 	hayPuntuaciones() {
 		return this.listaPuntuaciones.length != 0;
 	}
 
+	// Agrega un tema nuevo a la lista de temas, primero verificando que este tema no se encutentre repetido y todos sus valores ingresados sean validos.
+	// Retorna true o false como medio de identificacion de si se pudo crear o no el tema.
 	agregarTema(useNombre, useDescripcion, newColor) {
 		let exito = false;
 		let repetido = false;
@@ -41,13 +46,9 @@ class sistema {
 		}
 
 		if (vacio == true) {
-			alert(
-				"¡No se puede añadir el tema! Alguno de los valores ingresados es nulo."
-			);
+			alert("¡No se puede añadir el tema! Alguno de los valores ingresados es nulo.");
 		} else if (repetido == true) {
-			alert(
-				"¡No se puede añadir el tema! Ya existe un tema con este nombre."
-			);
+			alert("¡No se puede añadir el tema! Ya existe un tema con este nombre.");
 		} else {
 			let nuevoTema = new tema(useNombre, useDescripcion, newColor);
 			this.listaTemas.push(nuevoTema);
@@ -57,6 +58,8 @@ class sistema {
 		return exito;
 	}
 
+	// Verifica que todos los datos de las preguntas ingresadas sean validos, y en caso en que asi sea crea una nueva pregunta, separando el string de respuestas incorrectas en un array en el que cada coma separa un valor de otro, y se recortan los espacios al principio y final de cada uno.
+	// Retorna true o false como medio de identificacion de si se pudo crear o no el tema.
 	agregarPregunta(useTexto, useRespuestaC, useRespuestaI, useNivel, useTema) {
 		let exito = false;
 		let repetido = false;
@@ -90,17 +93,11 @@ class sistema {
 		}
 
 		if (vacio == true) {
-			alert(
-				"¡No se puede añadir la pregunta! No se ha ingresado uno de los datos requeridos."
-			);
+			alert("¡No se puede añadir la pregunta! No se ha ingresado uno de los datos requeridos.");
 		} else if (repetido == true) {
-			alert(
-				"¡No se puede añadir la pregunta! Ya existe una pregunta con este texto."
-			);
+			alert("¡No se puede añadir la pregunta! Ya existe una pregunta con este texto.");
 		} else if (nivel == false) {
-			alert(
-				"¡No se puede añadir la pregunta! El nivel ingresado debe ser entre 1 y 5."
-			);
+			alert("¡No se puede añadir la pregunta! El nivel ingresado debe ser entre 1 y 5.");
 		} else {
 			let useRespuestaILista = [];
 			let found = true;
@@ -119,17 +116,9 @@ class sistema {
 			}
 
 			if (useRespuestaILista.includes(useRespuestaC)) {
-				alert(
-					"¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas."
-				);
+				alert("¡No se puede añadir la pregunta! La respuesta correcta esta tambien entre las incorrectas.");
 			} else {
-				let nuevaPregunta = new pregunta(
-					useTexto,
-					useRespuestaC,
-					useRespuestaILista,
-					useNivel,
-					useTema
-				);
+				let nuevaPregunta = new pregunta(useTexto, useRespuestaC, useRespuestaILista, useNivel, useTema);
 				this.listaPreguntas.push(nuevaPregunta);
 				exito = true;
 			}
@@ -138,14 +127,17 @@ class sistema {
 		return exito;
 	}
 
+	// Añade una nueva puntuacion a la lista de puntuaciones.
 	agregarPuntuacion(usePuntuacion) {
 		this.listaPuntuaciones.push(usePuntuacion);
 	}
 
+	// Cuenta la cantidad de preguntas utilizando length para medir listaPreguntas[]
 	contarPreguntas() {
 		return this.listaPreguntas.length;
 	}
 
+	// Ordena las preguntas por tema alfabeticamente, y en caso en que tengan el mismo tema ordena por nivel de mayor a menor.
 	sortPreguntasTemaCrec() {
 		this.listaPreguntas.sort(function (a, b) {
 			let temaA = a.tema.nombre.toString();
@@ -158,6 +150,7 @@ class sistema {
 		});
 	}
 
+	// Ordena las preguntas por tema de forma inversamente alfabetica, y en caso en que tengan el mismo tema ordena por nivel de mayor a menor.
 	sortPreguntasTemaDecr() {
 		this.listaPreguntas.sort(function (a, b) {
 			let temaA = a.tema.nombre.toString();
@@ -170,6 +163,7 @@ class sistema {
 		});
 	}
 
+	// Calcula el promedio de todas las puntuaciones en listaPuntuaciones con dos digitos despues de la coma.
 	promedioPuntuaciones() {
 		let promedio = 0;
 
@@ -181,6 +175,7 @@ class sistema {
 		return Number.parseFloat(promedio).toFixed(2);
 	}
 
+	// Crea y retorna una lista de temas que contiene unicamente los temas que son utilizados en alguna pregunta.
 	listarTemasConPreguntas() {
 		let temas = [];
 
@@ -201,7 +196,7 @@ class tema {
 		this.color = color;
 	}
 
-	toString() {
+	toString() { 
 		return "Nombre: " + this.nombre + " Descripcion: " + this.descripcion;
 	}
 }
@@ -216,17 +211,6 @@ class pregunta {
 	}
 
 	toString() {
-		return (
-			"Texto: " +
-			this.texto +
-			" Respuesta Correcta: " +
-			this.respuestaCorrecta +
-			" Respuestas Incorrectas: " +
-			this.respuestasIncorrectas +
-			" Nivel: " +
-			this.nivel +
-			" Tema: " +
-			this.tema
-		);
+		return ("Texto: " + this.texto + " Respuesta Correcta: " + this.respuestaCorrecta + " Respuestas Incorrectas: " + this.respuestasIncorrectas + " Nivel: " + this.nivel + " Tema: " + this.tema);
 	}
 }
