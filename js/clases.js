@@ -197,7 +197,7 @@ class tema {
 	}
 
 	toString() { 
-		return "Nombre: " + this.nombre + " Descripcion: " + this.descripcion;
+		return this.nombre + ": " + this.descripcion;
 	}
 }
 

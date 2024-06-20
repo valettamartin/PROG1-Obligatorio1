@@ -240,7 +240,7 @@ function actualizarTemas() {
 		if (MiSistema.hayTemas() == true) {
 			document.getElementById("listaTemasVacia").style.display = "none";
 
-			let t = MiSistema.listaTemas[i].nombre;
+			let t = MiSistema.listaTemas[i];
 			let newLi = document.createElement("li");
 			let newLitext = document.createTextNode(t);
 			newLi.appendChild(newLitext);
@@ -428,7 +428,7 @@ function temaSinPregunta() {
 				cantTemas++;
 				listaTemasSinPregunta.push(t[i].nombre);
 				let newLi = document.createElement("li");
-				let newLitext = document.createTextNode(t[i].nombre);
+				let newLitext = document.createTextNode(t[i]);
 				newLi.appendChild(newLitext);
 				document.getElementById("listaTemaNoPreg").appendChild(newLi);
 			}
