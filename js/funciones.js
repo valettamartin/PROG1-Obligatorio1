@@ -263,6 +263,7 @@ function actualizarTemas() {
 	totalTemas.appendChild(objtext);
 }
 
+//Esta función actualiza los select de temas.
 function actualizarTemasSinPreg() {
 	let temas = MiSistema.listaTemas;
 	let jugar = document.getElementById("jugarTema");
@@ -364,6 +365,10 @@ function actualizarPreguntas() {
 	promedioPregTemas();
 }
 
+/*ordenar tambla utiliza las funciones sort de MiSistema que en caso de seleccionar creciente, ordena por orden alfabético
+creciente y si se trata del mismo tema, por nivel creciente, y al seleccionar decreciente, ordena por orden alfabético
+decreciente, y al igual que en caso creciente, si el tema es igual, por nivel creciente.
+*/
 function ordenarTabla() {
 	if (document.getElementById("creciente").checked) {
 		MiSistema.sortPreguntasTemaCrec();
@@ -372,6 +377,10 @@ function ordenarTabla() {
 	}
 }
 
+/* promedioPregoTemas utiliza la funcion contarPreguntas de MiSistema, luego recorre la lista de preguntas
+para contar la cantidad de temas ditintos que hay, hace el promedio con la cantidad de temas y preguntas
+y lo agrega al texto de administrar.
+*/
 function promedioPregTemas() {
 	let p = MiSistema.listaPreguntas;
 	let cantTemas = 0;
@@ -401,6 +410,9 @@ function promedioPregTemas() {
 	}
 }
 
+/* En esta función se recorre la lista de temas y la de preguntas, en caso de no haber preguntas para un tema,
+lo agrega a la lista de temas sin preguntas y si no hay temas sin preguntas muesta "sin datos" en la lista.
+*/
 function temaSinPregunta() {
 	let p = MiSistema.listaPreguntas;
 	let t = MiSistema.listaTemas;
@@ -439,10 +451,12 @@ function temaSinPregunta() {
 	return listaTemasSinPregunta;
 }
 
+// reiniciarPreguntas se utiliza al tocar el botón jugar y vacía la lista de preguntasYaHechas.
 function reiniciarPreguntas() {
 	preguntasYaHechas = [];
 }
 
+//Esta función se utiliza en caso de cambiarse de pestaña, de ser así, se llama a la función terminarJuego.
 function handleVisibilityChange() {
 	if (document.hidden) {
 		if (juegoEnProgreso) {
@@ -451,12 +465,18 @@ function handleVisibilityChange() {
 	}
 }
 
+//La siguiente función verifica que haya una partida en proceso, de lo contrario llama a terminarJuego.
 function verificarJuegoEnProgreso() {
 	if (juegoEnProgreso) {
 		terminarJuego();
 	}
 }
 
+/* peguntaAleatoria deshabilita el bóton de jugar, restaura los botones, verifica que haya preguntas para el tema y
+nivel seleccionados, en caso de no haber muesta un menaje, y de lo contrario crea una lista con las posibles preguntas,
+toma una aleatoria que no este en preguntasYaHechas para mostrar, y luego la añade a preguntasYaHechas, en caso de no 
+haber mas preguntas disponibles llama a la función terminarJuego.
+*/
 function preguntaAleatoria() {
 	juegoEnProgreso = true;
 	let jugarBoton = document.getElementById("idJugar");
@@ -550,6 +570,9 @@ function preguntaAleatoria() {
 	}
 }
 
+/* respuestasAleatorias, crea una lista con la respuesta correcta y las incorrectas, la reordena,
+y para cada bóton de respuestas toma una respuesta de esa lista.
+*/
 function respuestasAleatorias(preguntaElegida) {
 	let listaRespuestas = [];
 	let preguntasUse = MiSistema.listaPreguntas;
@@ -585,6 +608,10 @@ function respuestasAleatorias(preguntaElegida) {
 	}
 }
 
+/* La funcion corregir se utiliza cuando se selecciona una respuesta, modifica la puntuación actual, activa el
+sonido correspondiente y cambia el color del boton seleccionado, dependiendo de si es correcta o incorrecta la respuesta.
+Luego llama a actualizarPuntuación.
+*/
 function corregir(event) {
 	let respuestaSeleccionada = event.target.value;
 	let botonSeleccionado = event.target;
@@ -606,6 +633,7 @@ function corregir(event) {
 	actualizarPuntuacion();
 }
 
+//Esta función restaura los botones a sus valores y formatos originales.
 function restaurarBotones() {
 	let botones = document.querySelectorAll(".questionGeneralFormat");
 	botones.forEach((boton) => {
@@ -614,16 +642,22 @@ function restaurarBotones() {
 	});
 }
 
+// reproducirSonido se activa al seleccionar una respuesta.
 function reproducirSonido(src) {
 	let audio = new Audio(src);
 	audio.play();
 }
 
+//La siguiente función va actualizando el puntaje durante una partida.
 function actualizarPuntuacion() {
 	let puntaje = document.getElementById("puntajeAcumulado");
 	puntaje.innerText =
 		"Puntaje acumulado en esta partida: " + puntuacionActual;
 }
+
+/* puntuacionMaxima utiliza la lista de puntuaciones de MiSistema, busca la máxima puntuación en ella
+y modifica el texto de administrar con la puntuación máxima actual.
+*/
 
 function puntuacionMaxima() {
 	let puntuacion = MiSistema.listaPuntuaciones;
@@ -661,10 +695,16 @@ function juegoAyuda() {
 	);
 }
 
+//siguientePregunta se activa al seleccionar el botón Siguiente Pregunta, y llama a la función preguntaAleatoria.
 function siguientePregunta() {
 	preguntaAleatoria();
 }
 
+/*La siguiente función se activa al seleccionar el botón terminar o al cambiar de pestaña.
+Muestra un mensaje con el puntaje obtenido y añade este puntaje a la lista 
+de puntuaciones, para luego ser usado en puntajeMaximo.
+Luego restaura los textos de la pregunta y las respuestas, los botones, y actualiza la puntuación máxima.
+*/
 function terminarJuego() {
 	alert("El puntaje obtenido es: " + puntuacionActual);
 	let jugarBoton = document.getElementById("idJugar");
