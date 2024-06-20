@@ -491,7 +491,7 @@ function verificarJuegoEnProgreso() {
 	}
 }
 
-/* peguntaAleatoria, oculta el bloque de texto de pregunta y respuestas, deshabilita el bóton de jugar, restaura los botones, 
+/* peguntaAleatoria, muestra el bloque de texto de pregunta y respuestas, deshabilita el bóton de jugar, restaura los botones, 
 verifica que haya preguntas para el tema y nivel seleccionados, en caso de no haber muesta un mensaje, y de lo contrario crea 
 una lista con las posibles preguntas, toma una aleatoria que no este en preguntasYaHechas para mostrar, y luego la añade a preguntasYaHechas, 
 en caso de no haber mas preguntas disponibles llama a la función terminarJuego.
