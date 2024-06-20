@@ -584,9 +584,11 @@ function preguntaAleatoria() {
 			let objtext = document.createTextNode(texto);
 			textoPregunta.appendChild(objtext);
 			respuestasAleatorias(preguntaSeleccionada);
+			if (listarPreguntas.length == 1) {
+				botonSiguientePreg.disabled = true;
+			}
 			if (listarPreguntas.length == 0) {
 				terminarJuego();
-				botonSiguientePreg.disabled = true;
 			}
 		}
 	}
