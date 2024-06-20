@@ -491,10 +491,10 @@ function verificarJuegoEnProgreso() {
 	}
 }
 
-/* peguntaAleatoria deshabilita el bóton de jugar, restaura los botones, verifica que haya preguntas para el tema y
-nivel seleccionados, en caso de no haber muesta un mensaje, y de lo contrario crea una lista con las posibles preguntas,
-toma una aleatoria que no este en preguntasYaHechas para mostrar, y luego la añade a preguntasYaHechas, en caso de no 
-haber mas preguntas disponibles llama a la función terminarJuego.
+/* peguntaAleatoria, oculta el bloque de texto de pregunta y respuestas, deshabilita el bóton de jugar, restaura los botones, 
+verifica que haya preguntas para el tema y nivel seleccionados, en caso de no haber muesta un mensaje, y de lo contrario crea 
+una lista con las posibles preguntas, toma una aleatoria que no este en preguntasYaHechas para mostrar, y luego la añade a preguntasYaHechas, 
+en caso de no haber mas preguntas disponibles llama a la función terminarJuego.
 */
 function preguntaAleatoria() {
 	document.getElementById("gameDiv").style.display = "block";
@@ -727,8 +727,8 @@ function siguientePregunta() {
 }
 
 /*La siguiente función se activa al seleccionar el botón terminar o al cambiar de pestaña.
-Muestra un mensaje con el puntaje obtenido y añade este puntaje a la lista 
-de puntuaciones, para luego ser usado en puntajeMaximo.
+Pasa a mostrar solo el bloque con el tema y el nivel a eligir.
+Luego muestra un mensaje con el puntaje obtenido y añade este puntaje  a la lista de puntuaciones, para luego ser usado en puntajeMaximo.
 Luego restaura los textos de la pregunta y las respuestas, los botones, y actualiza la puntuación máxima.
 */
 function terminarJuego() {
