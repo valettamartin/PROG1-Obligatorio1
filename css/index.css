@@ -3,6 +3,7 @@
     Elena Couste - 333562
 */
 
+/* Utilizamos el universificador * para eliminar los margenes por defecto de los contenedores utilizados y asiganr una font global. */
 * {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
@@ -12,6 +13,7 @@ header, #informacion, #administrar, #jugar, h2, h3, p, img {
     margin-bottom: 15px;
 }
 
+/* Aseguramos que el header se mantenga en la parte superior de la pagina y no desaparezca al scrollear. */
 header {
     background-color: #f9a370;
     position: sticky;
@@ -25,6 +27,7 @@ article {
     padding-right: 5px;
 }
 
+/* Definimos display flex y justify content center para definir a flexContainer como un contenedor flex y mostrar sus elementos centrados en el display. */
 .flexContainer {
     display: flex;
     justify-content: center;
@@ -42,15 +45,18 @@ nav ul li {
     display: inline-block;
 }
 
+/* Utilizamos estilos para imitar un anchor con un href asignado, ya que de utilizar un href real se fija la posicion de la pagina a una scrolleada al seleccionar un div que ocupe mas que la totalidad del diplay port, como en el caso de Administrar */
 #irAdmin, #irInfo, #irJugar {
     color: #551A8B;
     text-decoration: underline;
 }
 
+/* Imitamos el pointer que aparece al hoverear un href con eventos. */
 #irAdmin:hover, #irInfo:hover, #irJugar:hover {
     cursor: pointer;
 }
 
+/* Imitamos el cambio de color que sucede mientras un href esta clickeado con eventos. */
 #irAdmin:active, #irInfo:active, #irJugar:active {
     color: #FF0000;
 }
@@ -88,6 +94,7 @@ figcaption {
     margin-right: 10px;
 }
 
+/* Formateamos las imagenes para ignorar sus dimensiones originales y acoplarse a las necesitadas. */
 .alumnos img {
     height: 90px;
     width: 90px;
@@ -101,6 +108,7 @@ figcaption {
     display: none;
 }
 
+/* Creamos un grid de 7 columnas y 2 filas a reutilizar en todos los lugares donde una distribucion similar era necesitada con el fin de poder alinear los objetos facilmente en 2 dimensiones y en diferentes contenedores. */
 .formButtons {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -149,6 +157,7 @@ figcaption {
     padding-top: 10px;
 }
 
+/* Utilizamos una combinacion de max-height, overflow, y un padding-bottom el cual iremos reduciendo con javascript para hacer que la tabla sea responsiva a la cantidad de elementos que contiene, manteniendo sus dimensiones constantes. */
 .tableContainer table {
     width: 100%;
     margin-top: 15px;
@@ -165,12 +174,14 @@ figcaption {
     background-color: #f2f2f2;
 }
 
+/* Con position sticky y top 0 aseguramos que el header de la tabla no desaparezca al hacer scroll por la tabla. */
 thead {
     position: sticky;
     top: 0;
     background-color: #ffd488;
 }
 
+/* Arreglamos los problemas de formato creados en los elementos de la tabla causados por el display block del padre, restaurando sus propiedades originales. */
 .tableContainer thead, .tableContainer tbody tr {
     display: table;
     width: 100%;

@@ -19,59 +19,37 @@ function innit() {
 	let admin = document.getElementById("irAdmin");
 	let jugar = document.getElementById("irJugar");
 
-	info.addEventListener("click", () => {
-		divManager(info);
-		verificarJuegoEnProgreso();
-	});
-	admin.addEventListener("click", () => {
-		divManager(admin);
-		verificarJuegoEnProgreso();
-	});
+	info.addEventListener("click", () => { divManager(info); verificarJuegoEnProgreso(); });
+	admin.addEventListener("click", () => { divManager(admin); verificarJuegoEnProgreso(); });
 	jugar.addEventListener("click", () => divManager(jugar));
 
-	document
-		.getElementById("agregarTema")
-		.addEventListener("click", agregarTema);
-	document
-		.getElementById("agregarPreg")
-		.addEventListener("click", agregarPregunta);
-	document
-		.getElementById("creciente")
-		.addEventListener("click", actualizarPreguntas);
-	document
-		.getElementById("decreciente")
-		.addEventListener("click", actualizarPreguntas);
-	document
-		.getElementById("idJugar")
-		.addEventListener("click", preguntaAleatoria);
-	document
-		.getElementById("irJugar")
-		.addEventListener("click", reiniciarPreguntas);
+	document.getElementById("agregarTema").addEventListener("click", agregarTema);
+	document.getElementById("agregarPreg").addEventListener("click", agregarPregunta);
+	document.getElementById("creciente").addEventListener("click", actualizarPreguntas);
+	document.getElementById("decreciente").addEventListener("click", actualizarPreguntas);
+	document.getElementById("idJugar").addEventListener("click", preguntaAleatoria);
+	document.getElementById("irJugar").addEventListener("click", reiniciarPreguntas);
 	document.getElementById("respuesta1").addEventListener("click", corregir);
 	document.getElementById("respuesta2").addEventListener("click", corregir);
 	document.getElementById("respuesta3").addEventListener("click", corregir);
 	document.getElementById("respuesta4").addEventListener("click", corregir);
 	document.getElementById("juegoAyuda").addEventListener("click", juegoAyuda);
-	document
-		.getElementById("juegoSiguiente")
-		.addEventListener("click", siguientePregunta);
-	document
-		.getElementById("juegoTerminar")
-		.addEventListener("click", terminarJuego);
+	document.getElementById("juegoSiguiente").addEventListener("click", siguientePregunta);
+	document.getElementById("juegoTerminar").addEventListener("click", terminarJuego);
 
 	let jugarBoton = document.getElementById("idJugar");
 	jugarBoton.disabled = false;
 	document.addEventListener("visibilitychange", handleVisibilityChange);
 }
 
+// Consultamos si el usuario desea cargar los datos de datosPrueba.js o no.
+// Se ejecuta primero al ejecutar la pagina.
 function deseaCargarDatos() {
 	let loadYesOrNo = "";
 	let loop = true;
 
 	while (loop == true) {
-		loadYesOrNo = prompt(
-			"¿Desea utilizar los datos precargados? Ingrese s/n."
-		);
+		loadYesOrNo = prompt("¿Desea utilizar los datos precargados? Ingrese s/n.");
 		loadYesOrNo = loadYesOrNo.toLocaleLowerCase();
 
 		if (loadYesOrNo != "s" && loadYesOrNo != "n") {
@@ -85,6 +63,11 @@ function deseaCargarDatos() {
 	}
 }
 
+/* Recorre todos los objetos contenidos en el array preguntas[] de datosPrueba.js (renombrado como datosPrueba[] arriba del codigo por comodidad), y crea con ellos en MiSistema lo siguiente:
+	-> Un Tema en caso de recorrer todos los temas (MiSistema.listaTemas) ya creados y verrificar que no se ha creado previamente.
+	-> Una pregunta en caso de recorrer todas las preguntas (MiSistema.listaPreguntas) ya creadas y verificar que no se ha creado previamente.
+*/
+// Se ejecuta al confirmar que se desean cargar datos en deseaCargarDatos()
 function cargarDatos() {
 	let loop = true;
 	let esta = false;
@@ -140,9 +123,7 @@ function cargarDatos() {
 		if (esta == false) {
 			loop = true;
 			for (j = 0; j < MiSistema.listaTemas.length && loop; j++) {
-				if (
-					datosPrueba[i].tema.nombre == MiSistema.listaTemas[j].nombre
-				) {
+				if (datosPrueba[i].tema.nombre == MiSistema.listaTemas[j].nombre) {
 					preguntaTema = MiSistema.listaTemas[j];
 					loop = false;
 				}
@@ -165,6 +146,8 @@ function cargarDatos() {
 	actualizarTemas();
 }
 
+// Se fija cual fue el div seleccionado (se le pasa como parametro), y aplica display none a todos los que no son este para ocultarlos y display block a este para mostrarlo.
+// Se ejecuta en innit al clickear uno de los botones del nav.
 function divManager(selectedButton) {
 	switch (selectedButton) {
 		case document.getElementById("irInfo"):
@@ -187,6 +170,8 @@ function divManager(selectedButton) {
 	}
 }
 
+// Crea un color aleatorio entre el amarillo y el marron, y lo ofrece como retorno en formato string con un valor de color hsl dentro.
+// Se ejecuta al crear un tema para asignarle un color identificador.
 function randomColor() {
 	let hue = Math.floor(Math.random() * (60 - 30 + 1)) + 30;
 	let saturation = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
@@ -196,6 +181,8 @@ function randomColor() {
 	return color;
 }
 
+// Agrega un nuevo tema con los valores presentes en el formulario de Alta de Temas presente en Administrar.  Llama a randomColor() tantas veces como sea necesario para generar un color que no haya sido previamente asignado a otro tema. En caso en que todos los datos sean validos, ejecuta las funciones pertinentes a la recarga de la pagina.
+// Se llama al clickear el boton de Agregar en Alta de Temas
 function agregarTema() {
 	let newNombre = document.getElementById("temaNombre").value;
 	let newDescripcion = document.getElementById("temaDesc").value;
@@ -205,7 +192,7 @@ function agregarTema() {
 	while (loop == true) {
 		newColor = randomColor();
 		let seRepite = false;
-		for (i = 0; i < MiSistema.listaTemas.length; i++) {
+		for (i = 0; i < MiSistema.listaTemas.lenggetElementByIdth; i++) {
 			if (MiSistema.listaTemas[i].color == newColor) {
 				seRepite = true;
 			}
@@ -225,6 +212,8 @@ function agregarTema() {
 	}
 }
 
+// Realiza el refresh en tiempo real de los temas. Se encarga de actualizar los select, vaciandolos y creandolos nuevamente y añadiendo todos los temas presentes en MiSistema.listaTemas siempre que es llamada. 
+// Es llamada cada ves que un tema nuevo es creado.
 function actualizarTemas() {
 	let temas = MiSistema.listaTemas;
 	let cantTemas = 0;
@@ -276,6 +265,8 @@ function actualizarTemasSinPreg() {
 	}
 }
 
+// Agrega una nueva pregunta con los datos del formulario Alta de Preguntas en caso de ser todos validos.
+// Se ejecuta al clickear Agregar en el formulario de Alta de Preguntas.
 function agregarPregunta() {
 	let newTexto = document.getElementById("pregText").value;
 	let newRespuestaC = document.getElementById("pregResp").value;
@@ -298,6 +289,8 @@ function agregarPregunta() {
 	}
 }
 
+// Actualiza las preguntas, metiendolas en la tabla y actualizando el contador de preguntas registradas. Tambien actualiza en tiempo real el tamaño de la tabla para mantenerlo siempre constante, independientemente de la cantidad de preguntas que contenga.
+// Se ejecuta siempre que una pregunta nueva es creada o se cambia el orden de la tabla.
 function actualizarPreguntas() {
 	ordenarTabla();
 	let vaciarTabla = document.getElementById("tablaPreguntasBody");
@@ -644,6 +637,8 @@ function puntuacionMaxima() {
 	maxPuntaje.appendChild(objtextPuntaje);
 }
 
+// Busca la respuesta correcta de la pregunta actualmente mostrada, y luego crea un string con el primer caracter de dicha respuesta y lo muestra por medio de un alert.
+// Se ejecuta al clickear el boton ayuda de Jugar.
 function juegoAyuda() {
 	let preguntaActual = document.getElementById("idTextoPregunta").innerText;
 	let loop = true;
@@ -656,9 +651,7 @@ function juegoAyuda() {
 	}
 
 	preguntaActualPrint = preguntaActual.slice(0, 1);
-	alert(
-		"El primer carácter de la respuesta correcta es: " + preguntaActualPrint
-	);
+	alert("El primer carácter de la respuesta correcta es: " + preguntaActualPrint);
 }
 
 function siguientePregunta() {
