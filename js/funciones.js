@@ -365,7 +365,7 @@ function actualizarPreguntas() {
 	promedioPregTemas();
 }
 
-/*ordenar tambla utiliza las funciones sort de MiSistema que en caso de seleccionar creciente, ordena por orden alfabético
+/*ordenarTabla utiliza las funciones sort de MiSistema que en caso de seleccionar creciente, ordena por orden alfabético
 creciente y si se trata del mismo tema, por nivel creciente, y al seleccionar decreciente, ordena por orden alfabético
 decreciente, y al igual que en caso creciente, si el tema es igual, por nivel creciente.
 */
@@ -473,7 +473,7 @@ function verificarJuegoEnProgreso() {
 }
 
 /* peguntaAleatoria deshabilita el bóton de jugar, restaura los botones, verifica que haya preguntas para el tema y
-nivel seleccionados, en caso de no haber muesta un menaje, y de lo contrario crea una lista con las posibles preguntas,
+nivel seleccionados, en caso de no haber muesta un mensaje, y de lo contrario crea una lista con las posibles preguntas,
 toma una aleatoria que no este en preguntasYaHechas para mostrar, y luego la añade a preguntasYaHechas, en caso de no 
 haber mas preguntas disponibles llama a la función terminarJuego.
 */
@@ -658,7 +658,6 @@ function actualizarPuntuacion() {
 /* puntuacionMaxima utiliza la lista de puntuaciones de MiSistema, busca la máxima puntuación en ella
 y modifica el texto de administrar con la puntuación máxima actual.
 */
-
 function puntuacionMaxima() {
 	let puntuacion = MiSistema.listaPuntuaciones;
 	let maxPuntaje = document.getElementById("maxpuntaje");
