@@ -515,7 +515,7 @@ function preguntaAleatoria() {
 	let resp4 = document.getElementById("respuesta4");
 	let listaBotones = [resp1, resp2, resp3, resp4];
 	let botonSiguientePreg = document.getElementById("juegoSiguiente");
-	botonSiguientePreg.disabled = true;
+	botonSiguientePreg.disabled = false;
 
 	restaurarBotones();
 
@@ -586,7 +586,7 @@ function preguntaAleatoria() {
 			respuestasAleatorias(preguntaSeleccionada);
 			if (listarPreguntas.length == 0) {
 				terminarJuego();
-				botonSiguientePreg.disabled = false;
+				botonSiguientePreg.disabled = true;
 			}
 		}
 	}
