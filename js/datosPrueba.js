@@ -1,5 +1,8 @@
 // DATOS DE PRUEBA
-
+/* 
+    Elena Couste - 333562
+    Martin Valetta - 251093
+*/
 // Preguntas
 let preguntas = [
 	{

@@ -1,3 +1,7 @@
+/* 
+    Elena Couste - 333562
+    Martin Valetta - 251093
+*/
 class sistema {
 	constructor() {
 		this.listaTemas = [];

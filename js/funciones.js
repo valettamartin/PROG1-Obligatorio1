@@ -1,3 +1,8 @@
+/* 
+    Elena Couste - 333562
+    Martin Valetta - 251093
+*/
+
 window.addEventListener("load", innit);
 let MiSistema = new sistema();
 let preguntasYaHechas = [];
