@@ -143,23 +143,25 @@
                             <input class="buttonType" type="button" value="Jugar" id="idJugar">
                         </div>
                     </form>
-                    <h3>Juego</h3>
-                    <p id="puntajeAcumulado">Puntaje acummulado en esta Partida: 0</p>
-                    <p>La pregunta es...:</p>
-                    <form action="" method="post">
-                        <p class="questionTitle questionGeneralFormat" id="idTextoPregunta">TEXTO DE LA PREGUNTA</p>
-                        <div class="formFlexContainer answereContainer">
-                            <input class="questionGeneralFormat" id="respuesta1" type="button" value="Respuesta 1">
-                            <input class="questionGeneralFormat" id="respuesta2" type="button" value="Respuesta 2">
-                            <input class="questionGeneralFormat" id="respuesta3" type="button" value="Respuesta 3">
-                            <input class="questionGeneralFormat" id="respuesta4" type="button" value="Respuesta 4">
-                        </div>
-                        <div class="formFlexContainer buttonContainer">
-                            <input id="juegoAyuda" type="button" value="Ayuda">
-                            <input id="juegoSiguiente" type="button" value="Siguiente Pregunta">
-                            <input id="juegoTerminar" type="button" value="Terminar">
-                        </div>
-                    </form>
+                    <div class="gameDiv" id="gameDiv">
+                        <h3>Juego</h3>
+                        <p id="puntajeAcumulado">Puntaje acummulado en esta Partida: 0</p>
+                        <p>La pregunta es...:</p>
+                        <form action="" method="post">
+                            <p class="questionTitle questionGeneralFormat" id="idTextoPregunta">TEXTO DE LA PREGUNTA</p>
+                            <div class="formFlexContainer answereContainer">
+                                <input class="questionGeneralFormat" id="respuesta1" type="button" value="Respuesta 1">
+                                <input class="questionGeneralFormat" id="respuesta2" type="button" value="Respuesta 2">
+                                <input class="questionGeneralFormat" id="respuesta3" type="button" value="Respuesta 3">
+                                <input class="questionGeneralFormat" id="respuesta4" type="button" value="Respuesta 4">
+                            </div>
+                            <div class="formFlexContainer buttonContainer">
+                                <input id="juegoAyuda" type="button" value="Ayuda">
+                                <input id="juegoSiguiente" type="button" value="Siguiente Pregunta">
+                                <input id="juegoTerminar" type="button" value="Terminar">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </article>
         </section>

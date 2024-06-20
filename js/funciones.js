@@ -497,6 +497,7 @@ toma una aleatoria que no este en preguntasYaHechas para mostrar, y luego la añ
 haber mas preguntas disponibles llama a la función terminarJuego.
 */
 function preguntaAleatoria() {
+	document.getElementById("gameDiv").style.display = "block";
 	juegoEnProgreso = true;
 	let jugarBoton = document.getElementById("idJugar");
 	jugarBoton.disabled = true;
@@ -731,6 +732,7 @@ de puntuaciones, para luego ser usado en puntajeMaximo.
 Luego restaura los textos de la pregunta y las respuestas, los botones, y actualiza la puntuación máxima.
 */
 function terminarJuego() {
+	document.getElementById("gameDiv").style.display = "none";
 	alert("El puntaje obtenido es: " + puntuacionActual);
 	let jugarBoton = document.getElementById("idJugar");
 	let textoPregunta = document.getElementById("idTextoPregunta");

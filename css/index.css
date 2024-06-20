@@ -236,3 +236,7 @@ thead {
 .buttonContainer input {
     padding: 3px;
 }
+
+.gameDiv {
+    display: none;
+}
