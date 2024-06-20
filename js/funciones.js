@@ -19,23 +19,45 @@ function innit() {
 	let admin = document.getElementById("irAdmin");
 	let jugar = document.getElementById("irJugar");
 
-	info.addEventListener("click", () => { divManager(info); verificarJuegoEnProgreso(); });
-	admin.addEventListener("click", () => { divManager(admin); verificarJuegoEnProgreso(); });
+	info.addEventListener("click", () => {
+		divManager(info);
+		verificarJuegoEnProgreso();
+	});
+	admin.addEventListener("click", () => {
+		divManager(admin);
+		verificarJuegoEnProgreso();
+	});
 	jugar.addEventListener("click", () => divManager(jugar));
 
-	document.getElementById("agregarTema").addEventListener("click", agregarTema);
-	document.getElementById("agregarPreg").addEventListener("click", agregarPregunta);
-	document.getElementById("creciente").addEventListener("click", actualizarPreguntas);
-	document.getElementById("decreciente").addEventListener("click", actualizarPreguntas);
-	document.getElementById("idJugar").addEventListener("click", preguntaAleatoria);
-	document.getElementById("irJugar").addEventListener("click", reiniciarPreguntas);
+	document
+		.getElementById("agregarTema")
+		.addEventListener("click", agregarTema);
+	document
+		.getElementById("agregarPreg")
+		.addEventListener("click", agregarPregunta);
+	document
+		.getElementById("creciente")
+		.addEventListener("click", actualizarPreguntas);
+	document
+		.getElementById("decreciente")
+		.addEventListener("click", actualizarPreguntas);
+	document
+		.getElementById("idJugar")
+		.addEventListener("click", preguntaAleatoria);
+	document
+		.getElementById("irJugar")
+		.addEventListener("click", reiniciarPreguntas);
 	document.getElementById("respuesta1").addEventListener("click", corregir);
 	document.getElementById("respuesta2").addEventListener("click", corregir);
 	document.getElementById("respuesta3").addEventListener("click", corregir);
 	document.getElementById("respuesta4").addEventListener("click", corregir);
 	document.getElementById("juegoAyuda").addEventListener("click", juegoAyuda);
-	document.getElementById("juegoSiguiente").addEventListener("click", siguientePregunta);
-	document.getElementById("juegoTerminar").addEventListener("click", terminarJuego);
+	document
+		.getElementById("juegoSiguiente")
+		.addEventListener("click", siguientePregunta);
+	document
+		.getElementById("juegoTerminar")
+		.addEventListener("click", terminarJuego);
 
 	let jugarBoton = document.getElementById("idJugar");
 	jugarBoton.disabled = false;
@@ -49,7 +71,9 @@ function deseaCargarDatos() {
 	let loop = true;
 
 	while (loop == true) {
-		loadYesOrNo = prompt("¿Desea utilizar los datos precargados? Ingrese s/n.");
+		loadYesOrNo = prompt(
+			"¿Desea utilizar los datos precargados? Ingrese s/n."
+		);
 		loadYesOrNo = loadYesOrNo.toLocaleLowerCase();
 
 		if (loadYesOrNo != "s" && loadYesOrNo != "n") {
@@ -123,7 +147,9 @@ function cargarDatos() {
 		if (esta == false) {
 			loop = true;
 			for (j = 0; j < MiSistema.listaTemas.length && loop; j++) {
-				if (datosPrueba[i].tema.nombre == MiSistema.listaTemas[j].nombre) {
+				if (
+					datosPrueba[i].tema.nombre == MiSistema.listaTemas[j].nombre
+				) {
 					preguntaTema = MiSistema.listaTemas[j];
 					loop = false;
 				}
@@ -212,7 +238,7 @@ function agregarTema() {
 	}
 }
 
-// Realiza el refresh en tiempo real de los temas. Se encarga de actualizar los select, vaciandolos y creandolos nuevamente y añadiendo todos los temas presentes en MiSistema.listaTemas siempre que es llamada. 
+// Realiza el refresh en tiempo real de los temas. Se encarga de actualizar los select, vaciandolos y creandolos nuevamente y añadiendo todos los temas presentes en MiSistema.listaTemas siempre que es llamada.
 // Es llamada cada ves que un tema nuevo es creado.
 function actualizarTemas() {
 	let temas = MiSistema.listaTemas;
@@ -488,6 +514,8 @@ function preguntaAleatoria() {
 	let resp3 = document.getElementById("respuesta3");
 	let resp4 = document.getElementById("respuesta4");
 	let listaBotones = [resp1, resp2, resp3, resp4];
+	let botonSiguientePreg = document.getElementById("juegoSiguiente");
+	botonSiguientePreg.disabled = true;
 
 	restaurarBotones();
 
@@ -558,6 +586,7 @@ function preguntaAleatoria() {
 			respuestasAleatorias(preguntaSeleccionada);
 			if (listarPreguntas.length == 0) {
 				terminarJuego();
+				botonSiguientePreg.disabled = false;
 			}
 		}
 	}
@@ -684,7 +713,9 @@ function juegoAyuda() {
 	}
 
 	preguntaActualPrint = preguntaActual.slice(0, 1);
-	alert("El primer carácter de la respuesta correcta es: " + preguntaActualPrint);
+	alert(
+		"El primer carácter de la respuesta correcta es: " + preguntaActualPrint
+	);
 }
 
 //siguientePregunta se activa al seleccionar el botón Siguiente Pregunta, y llama a la función preguntaAleatoria.
