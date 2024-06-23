@@ -510,11 +510,7 @@ function preguntaAleatoria() {
 	let textoPregunta = document.getElementById("idTextoPregunta");
 	textoPregunta.innerHTML = "";
 	let texto = "";
-	let resp1 = document.getElementById("respuesta1");
-	let resp2 = document.getElementById("respuesta2");
-	let resp3 = document.getElementById("respuesta3");
-	let resp4 = document.getElementById("respuesta4");
-	let listaBotones = [resp1, resp2, resp3, resp4];
+	let listaBotones = document.getElementById("respuestasContainer").querySelectorAll("*");
 	let botonSiguientePreg = document.getElementById("juegoSiguiente");
 	botonSiguientePreg.disabled = false;
 
@@ -629,6 +625,12 @@ function respuestasAleatorias(preguntaElegida) {
 
 		containerRespuestas.appendChild(newButton);
 	}
+
+	let añadirListenerABoton = document.getElementById("respuestasContainer").querySelectorAll("*");
+
+	añadirListenerABoton.forEach(function(boton) {
+		boton.addEventListener("click", corregir);
+	})
 }
 
 /* La funcion corregir se utiliza cuando se selecciona una respuesta, modifica la puntuación actual, activa el
