@@ -520,32 +520,26 @@ function preguntaAleatoria() {
 
 	restaurarBotones();
 
-	if (
-		listaTemasSinPregunta.includes(
-			document.getElementById("jugarTema").options[temaIndex].text
-		)
-	) {
+	if (listaTemasSinPregunta.includes(document.getElementById("jugarTema").options[temaIndex].text)) {
 		texto = "NO HAY PREGUNTA";
 		let objtext = document.createTextNode(texto);
 		textoPregunta.appendChild(objtext);
+
 		for (let i = 0; i < listaBotones.length; i++) {
 			listaBotones[i].value = "Error";
 			listaBotones[i].innerText = "Error";
 		}
-		alert(
-			"Error, no hay preguntas disponibles para el tema seleccionado, por favor seleccione otro tema"
-		);
+
+		alert("Error, no hay preguntas disponibles para el tema seleccionado, por favor seleccione otro tema");
+
 		jugarBoton.disabled = false;
 		juegoEnProgreso = false;
 		return;
 	} else {
-		let temaSeleccionado =
-			document.getElementById("jugarTema").options[temaIndex].text;
-
-		let temaColor = JSON.parse(
-			document.getElementById("jugarTema").options[temaIndex].value
-		);
+		let temaSeleccionado = document.getElementById("jugarTema").options[temaIndex].text;
+		let temaColor = JSON.parse(document.getElementById("jugarTema").options[temaIndex].value);
 		temaColor = temaColor.color;
+
 		for (i = 0; i < listaBotones.length; i++) {
 			listaBotones[i].style.backgroundColor = temaColor;
 		}
@@ -563,28 +557,26 @@ function preguntaAleatoria() {
 			}
 		}
 		if (!hayNivel) {
-			alert(
-				"Error, no hay preguntas para el tema elegido con el nivel seleccionado, por favor cambie de tema o de nivel"
-			);
+			alert("Error, no hay preguntas para el tema elegido con el nivel seleccionado, por favor cambie de tema o de nivel");
 			texto = "NO HAY PREGUNTA";
 			let objtext = document.createTextNode(texto);
 			textoPregunta.appendChild(objtext);
+
 			for (let i = 0; i < listaBotones.length; i++) {
 				listaBotones[i].value = "Error";
 				listaBotones[i].innerText = "Error";
 			}
+
 			jugarBoton.disabled = false;
 			juegoEnProgreso = false;
 		} else {
-			let preguntaSeleccionada =
-				listarPreguntas[
-					Math.floor(Math.random() * listarPreguntas.length)
-				];
+			let preguntaSeleccionada = listarPreguntas[ Math.floor(Math.random() * listarPreguntas.length) ];
 			preguntasYaHechas.push(preguntaSeleccionada);
 			texto = preguntaSeleccionada;
 			let objtext = document.createTextNode(texto);
 			textoPregunta.appendChild(objtext);
 			respuestasAleatorias(preguntaSeleccionada);
+
 			if (listarPreguntas.length == 1) {
 				botonSiguientePreg.disabled = true;
 			}
@@ -601,17 +593,15 @@ y para cada bóton de respuestas toma una respuesta de esa lista.
 function respuestasAleatorias(preguntaElegida) {
 	let listaRespuestas = [];
 	let preguntasUse = MiSistema.listaPreguntas;
-	let resp1 = document.getElementById("respuesta1");
-	let resp2 = document.getElementById("respuesta2");
-	let resp3 = document.getElementById("respuesta3");
-	let resp4 = document.getElementById("respuesta4");
-	let botones = [resp1, resp2, resp3, resp4];
+	let containerRespuestas = document.getElementById("respuestasContainer");
+	let temaColor = "";
 
 	for (let i = 0; i < preguntasUse.length; i++) {
 		if (preguntasUse[i].texto == preguntaElegida) {
+			temaColor = preguntasUse[i].tema.color;
 			respuestaCorrecta = preguntasUse[i].respuestaCorrecta;
 			listaRespuestas.push(respuestaCorrecta);
-			for (let j = 0; j < 3; j++) {
+			for (let j = 0 ; j < preguntasUse[i].respuestasIncorrectas.length ; j++) {
 				listaRespuestas.push(preguntasUse[i].respuestasIncorrectas[j]);
 			}
 			break;
@@ -627,9 +617,17 @@ function respuestasAleatorias(preguntaElegida) {
 
 	reOrdenarLista(listaRespuestas);
 
-	for (let i = 0; i < botones.length; i++) {
-		botones[i].value = listaRespuestas[i];
-		botones[i].innerText = listaRespuestas[i];
+	containerRespuestas.innerHTML = "";
+
+	for (let i = 0; i < listaRespuestas.length; i++) {
+		let newButton = document.createElement("input");
+		newButton.classList.add("questionGeneralFormat");
+		newButton.type = "button";
+		newButton.value = listaRespuestas[i];
+		newButton.innerText = listaRespuestas[i];
+		newButton.style.backgroundColor = temaColor;
+
+		containerRespuestas.appendChild(newButton);
 	}
 }
 
@@ -738,11 +736,7 @@ function terminarJuego() {
 	let textoPregunta = document.getElementById("idTextoPregunta");
 	textoPregunta.innerHTML = "";
 	let texto = "";
-	let resp1 = document.getElementById("respuesta1");
-	let resp2 = document.getElementById("respuesta2");
-	let resp3 = document.getElementById("respuesta3");
-	let resp4 = document.getElementById("respuesta4");
-	let listaBotones = [resp1, resp2, resp3, resp4];
+	let listaBotones = document.getElementById("respuestasContainer").querySelectorAll("*");
 
 	MiSistema.agregarPuntuacion(puntuacionActual);
 	puntuacionActual = 0;
